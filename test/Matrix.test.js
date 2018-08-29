@@ -11,3 +11,20 @@ test('set value', t => {
   matrix.set(3, 2, 6)
   t.deepEqual(matrix.vector, [1, 2, 3, 4, 5, 6])
 })
+
+test('for each row', t => {
+  const matrix = new Matrix([
+    [1, 2], [3, 4], [5, 6]
+  ])
+  const arrays = []
+  matrix.forEachRow(row => {
+    arrays.push([])
+    console.log(arrays)
+    row.forEach(item => {
+      arrays[arrays.length - 1].push(item)
+    })
+  })
+  t.deepEqual(arrays, [
+    [1, 2], [3, 4], [5, 6]
+  ])
+})
