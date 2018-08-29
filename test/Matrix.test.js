@@ -19,7 +19,6 @@ test('for each row', t => {
   const arrays = []
   matrix.forEachRow(row => {
     arrays.push([])
-    console.log(arrays)
     row.forEach(item => {
       arrays[arrays.length - 1].push(item)
     })
