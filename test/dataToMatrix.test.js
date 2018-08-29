@@ -1,24 +1,10 @@
 const test = require('ava')
 const dataToMatrix = require('../src/dataToMatrix')
 const Matrix = require('../src/Matrix')
+const { meta, data } = require('./fixtures')
 
 test('convert simple json', t => {
-  const meta = {
-    order: ['a', 'b'],
-    mapping: {
-      a: {
-        title: 'A'
-      },
-      b: {
-        title: 'B'
-      }
-    }
-  }
-  const data = {
-    a: 1,
-    b: 2
-  }
-  const matrix = dataToMatrix(meta, data)
+  const matrix = dataToMatrix(meta.simple, data.simple[0])
   t.deepEqual(matrix, new Matrix([
     [ 
       { data: 1, rowSpan: 1, colSpan: 1 },
@@ -28,36 +14,7 @@ test('convert simple json', t => {
 })
 
 test('convert nested json', t => {
-  const meta = {
-    order: ['a', 'b'],
-    mapping: {
-      a: {
-        title: 'A'
-      },
-      b: {
-        title: 'B',
-        meta: {
-          order: ['c', 'd'],
-          mapping: {
-            c: {
-              title: 'C'
-            },
-            d: {
-              title: 'D'
-            }
-          }
-        }
-      }
-    }
-  }
-  const data = {
-    a: 1,
-    b: {
-      c: 2,
-      d: 3
-    }
-  }
-  const matrix = dataToMatrix(meta, data)
+  const matrix = dataToMatrix(meta.nested, data.nested[0])
   t.deepEqual(matrix, new Matrix([
     [ 
       { data: 1, rowSpan: 1, colSpan: 1 },

@@ -1,31 +1,11 @@
 const test = require('ava')
 const jsonToTable = require('../src/jsonToTable')
 const Builder = require('./Builder')
+const { meta, data } = require('./fixtures')
 
 test('convert simple json', t => {
-  const meta = {
-    order: ['a', 'b'],
-    mapping: {
-      a: {
-        title: 'A'
-      },
-      b: {
-        title: 'B'
-      }
-    }
-  }
-  const data = [
-    {
-      a: 1,
-      b: 2
-    },
-    {
-      a: 3,
-      b: 4
-    }
-  ]
   const builder = new Builder()
-  jsonToTable(meta, data, builder)
+  jsonToTable(meta.simple, data.simple, builder)
   t.deepEqual(builder.data, {
     head: [
       [
@@ -47,46 +27,8 @@ test('convert simple json', t => {
 })
 
 test('convert nested json', t => {
-  const meta = {
-    order: ['a', 'b'],
-    mapping: {
-      a: {
-        title: 'A'
-      },
-      b: {
-        title: 'B',
-        meta: {
-          order: ['c', 'd'],
-          mapping: {
-            c: {
-              title: 'C'
-            },
-            d: {
-              title: 'D'
-            }
-          }
-        }
-      }
-    }
-  }
-  const data = [
-    {
-      a: 1,
-      b: {
-        c: 2,
-        d: 3
-      }
-    },
-    {
-      a: 4,
-      b: {
-        c: 5,
-        d: 6
-      }
-    }
-  ]
   const builder = new Builder()
-  jsonToTable(meta, data, builder)
+  jsonToTable(meta.nested, data.nested, builder)
   t.deepEqual(builder.data, {
     head: [
       [
