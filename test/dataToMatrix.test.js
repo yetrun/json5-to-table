@@ -13,6 +13,16 @@ test('convert simple json', t => {
   ]))
 })
 
+test('convert undefined prop', t => {
+  const matrix = dataToMatrix(meta.simple, { b: 1 })
+  t.deepEqual(matrix, new Matrix([
+    [ 
+      { data: undefined, rowSpan: 1, colSpan: 1 },
+      { data: 1, rowSpan: 1, colSpan: 1 },
+    ]
+  ]))
+})
+
 test('convert nested json', t => {
   const matrix = dataToMatrix(meta.nested, data.nested[0])
   t.deepEqual(matrix, new Matrix([

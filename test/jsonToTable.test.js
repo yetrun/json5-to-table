@@ -19,8 +19,8 @@ test('convert simple json', t => {
         { data: 2, rowSpan: 1, colSpan: 1 }
       ],
       [
-        { data: 3, rowSpan: 1, colSpan: 1 },
-        { data: 4, rowSpan: 1, colSpan: 1 }
+        { data: undefined, rowSpan: 1, colSpan: 1 },
+        { data: 3, rowSpan: 1, colSpan: 1 }
       ]
     ]
   })
