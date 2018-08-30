@@ -1,28 +1,11 @@
 const Matrix = require('./Matrix')
+const countMetaMatrixSize = require('./countMetaMatrixSize')
 
 function metaToMatrix (meta) {
-  const [rowSpan, colSpan] = countMatrixSize(meta)
+  const [rowSpan, colSpan] = countMetaMatrixSize(meta)
   const matrix = new Matrix(rowSpan, colSpan)
   metaToMatrixHelper(meta, matrix, 1, 1)
   return matrix
-}
-
-function countMatrixSize (meta) {
-  let rowSpan = 0
-  let colSpan = 0
-  for (const key of meta.order) {
-    const props = meta.mapping[key]
-    let keyRowSpan = 1
-    let keyColSpan = 1
-    if (props.meta) {
-      const [_rowSpan, _colSpan] = countMatrixSize(props.meta)
-      keyRowSpan = 1 + _rowSpan
-      keyColSpan = _colSpan
-    }
-    rowSpan = Math.max(rowSpan, keyRowSpan)
-    colSpan += keyColSpan
-  }
-  return [rowSpan, colSpan]
 }
 
 function metaToMatrixHelper (meta, matrix, rowFrom, colFrom) {

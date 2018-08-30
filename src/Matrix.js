@@ -18,6 +18,16 @@ class Matrix {
     this.vector[index] = data
   }
 
+  get (rowIndex, colIndex) {
+    const index = this._calcIndex(rowIndex, colIndex)
+    return this.vector[index]
+  }
+
+  fill (value) {
+    this.vector.fill(value)
+    return this
+  }
+
   forEachRow (callback) {
     for (let rowIndex = 1; rowIndex <= this.rowCount; rowIndex++) {
       callback(new Row(this.vector, this._calcIndex(rowIndex, 1) + 1, this.colCount))

@@ -23,3 +23,19 @@ test('convert nested json', t => {
     ]
   ]))
 })
+
+test('convert nested object array', t => {
+  const matrix = dataToMatrix(meta.nested, data.nestedObjectArray[0])
+  t.deepEqual(matrix, new Matrix([
+    [ 
+      { data: 1, rowSpan: 2, colSpan: 1 },
+      { data: 2, rowSpan: 1, colSpan: 1 },
+      { data: 3, rowSpan: 1, colSpan: 1 }
+    ],
+    [ 
+      false,
+      { data: 4, rowSpan: 1, colSpan: 1 },
+      { data: 5, rowSpan: 1, colSpan: 1 }
+    ]
+  ]))
+})

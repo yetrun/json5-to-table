@@ -59,13 +59,37 @@ const nestedData = [
   }
 ]
 
+const nestedObjectArrayData = [
+  {
+    a: 1,
+    b: [
+      {
+        c: 2,
+        d: 3
+      },
+      {
+        c: 4,
+        d: 5
+      },
+    ]
+  },
+  {
+    a: 6,
+    b: {
+      c: 7,
+      d: 8
+    }
+  },
+]
+
 module.exports = {
   meta: {
     simple: simpleMeta,
-    nested: nestedMeta
+    nested: nestedMeta,
   },
   data: {
     simple: simpleData,
-    nested: nestedData
+    nested: nestedData,
+    nestedObjectArray: nestedObjectArrayData
   }
 }
