@@ -3,7 +3,7 @@ const countMetaMatrixSize = require('./countMetaMatrixSize')
 
 function metaToMatrix (meta) {
   const [rowSpan, colSpan] = countMetaMatrixSize(meta)
-  const matrix = new Matrix(rowSpan, colSpan) // TODO: .fill(false)
+  const matrix = new Matrix(rowSpan, colSpan).fill(false)
   metaToMatrixHelper(meta, matrix, 1, 1)
   return matrix
 }
@@ -13,18 +13,12 @@ function metaToMatrixHelper (meta, matrix, rowFrom, colFrom) {
   for (const key of meta.order) {
     const props = meta.mapping[key]
     if (props.meta) {
-      const colSpan = metaToMatrixHelper (props.meta, matrix, rowFrom + 1, colFrom)
+      const colSpan = metaToMatrixHelper(props.meta, matrix, rowFrom + 1, colFrom)
       matrix.set(rowFrom, colFrom, { rowSpan: 1, colSpan: colSpan, title: props.title })
-      for (let colIndex = colFrom + 1; colIndex < colFrom + colSpan; colIndex++) {
-        matrix.set(rowFrom, colIndex, false)
-      }
       colFrom += colSpan
     } else {
       matrix.set(rowFrom, colFrom, 
         { rowSpan: matrix.rowCount - rowFrom + 1, colSpan: 1, title: props.title })
-      for (let rowIndex = rowFrom + 1; rowIndex <= matrix.rowCount; rowIndex++) {
-        matrix.set(rowIndex, colFrom, false)
-      }
       colFrom += 1
     }
   }

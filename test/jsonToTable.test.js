@@ -55,8 +55,6 @@ test('convert nested json', t => {
   })
 })
 
-// TODO: 基本值数组单行显示
-
 test('convert nested object array', t => {
   const builder = new Builder()
   jsonToTable(meta.nested, data.nestedObjectArray, builder)

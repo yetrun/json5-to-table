@@ -1,3 +1,4 @@
+const isPrimitive = require('./isPrimitive')
 const Matrix = require('./Matrix')
 const countMetaMatrixSize = require('./countMetaMatrixSize')
 const countDataMatrixSize = require('./countDataMatrixSize')
@@ -18,9 +19,9 @@ function dataToMatrix (meta, data, metaSizeMap) {
 // 特例：
 // - data可能是undefined
 function dataToExpandedMatrix (meta, data, matrix, colFrom, metaSizeMap) {
-  if (!data) {
+  if (isPrimitive(data)) {
     const [_, colSpan] = metaSizeMap.get(meta)
-    matrix.set(1, colFrom, { data: undefined, rowSpan: matrix.rowCount, colSpan: colSpan })
+    matrix.set(1, colFrom, { data: data, rowSpan: matrix.rowCount, colSpan: colSpan })
     return colSpan
   }
 
@@ -70,10 +71,9 @@ function dataToExpandedMatrix (meta, data, matrix, colFrom, metaSizeMap) {
 // 余下的空白区域不会做任何处理。
 // 同时该实现返回实际占用的rowSpan。
 function dataToCompactMatrix (meta, data, matrix, rowFrom, colFrom, metaSizeMap) {
-  if (!data) {
-    // TODO: data不是对象或数组
+  if (isPrimitive(data)) {
     const [_, colSpan] = metaSizeMap.get(meta)
-    matrix.set(1, colFrom, { data: undefined, rowSpan: 1, colSpan: colSpan })
+    matrix.set(1, colFrom, { data: data, rowSpan: 1, colSpan: colSpan })
     return 1
   }
 

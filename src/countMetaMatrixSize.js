@@ -21,13 +21,13 @@ function countMetaMatrixSize (meta) {
   return [rowSpan, colSpan, map]
 }
 
-// TODO: 更高效地实现 
+// https://stackoverflow.com/questions/32000865/simplest-way-to-merge-es6-maps-sets#answer-32000937
 function merge (maps) {
-  let mergedMap = new Map()
-  for (const map of maps) {
-    mergedMap = new Map([...mergedMap, ...map])
-  }
-  return mergedMap
+  return new Map((function *() {
+    for (const map of maps) {
+      yield *map
+    }
+  })())
 }
 
 module.exports = countMetaMatrixSize
