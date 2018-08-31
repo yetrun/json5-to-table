@@ -2,10 +2,12 @@ const Matrix = require('./Matrix')
 const countMetaMatrixSize = require('./countMetaMatrixSize')
 const countDataMatrixSize = require('./countDataMatrixSize')
 
-function dataToMatrix (meta, data) {
+function dataToMatrix (meta, data, metaSizeMap) {
   const [rowSpan, colSpan] = countDataMatrixSize(meta, data)
   const matrix = new Matrix(rowSpan, colSpan).fill(false)
-  const [, , metaSizeMap] = countMetaMatrixSize(meta)
+  if (!metaSizeMap) {
+    [, , metaSizeMap] = countMetaMatrixSize(meta)
+  }
   dataToExpandedMatrix(meta, data, matrix, 1, metaSizeMap)
   return matrix
 }
@@ -31,13 +33,13 @@ function dataToExpandedMatrix (meta, data, matrix, colFrom, metaSizeMap) {
       const keyDataArray = data[key]
 
       // 将该区域全部merge留白
-      const [, _colSpan] = countMetaMatrixSize(props.meta)
+      const [, _colSpan] = metaSizeMap.get(props.meta)
       matrix.set(1, currentColFrom, { data: undefined, rowSpan: matrix.rowCount, colSpan: _colSpan })
 
       // 紧凑层排
       let currentRowFrom = 1
       for (const keyData of keyDataArray) {
-        const _rowSpan = dataToCompactMatrix(props.meta, keyData, matrix, currentRowFrom, currentColFrom)
+        const _rowSpan = dataToCompactMatrix(props.meta, keyData, matrix, currentRowFrom, currentColFrom, metaSizeMap)
         currentRowFrom += _rowSpan
       }
 
@@ -64,7 +66,7 @@ function dataToExpandedMatrix (meta, data, matrix, colFrom, metaSizeMap) {
 // 紧凑的dataToMatrix实现，该实现仅仅会扩展孤单数据到实际占用的行。
 // 余下的空白区域会merge.
 // 同时该实现返回实际占用的rowSpan（不包括余下的空白区域 ）。
-function dataToCompactMatrix (meta, data, matrix, rowFrom, colFrom) {
+function dataToCompactMatrix (meta, data, matrix, rowFrom, colFrom, metaSizeMap) {
   const unsetRowSpans = []
   let maxRowSpan = 0
   let currentColFrom = colFrom
@@ -79,13 +81,13 @@ function dataToCompactMatrix (meta, data, matrix, rowFrom, colFrom) {
       }
 
       // 将该区域全部merge留白
-      const [, _colSpan] = countMetaMatrixSize(props.meta)
+      const [, _colSpan] = metaSizeMap.get(props.meta)
       matrix.set(rowFrom, currentColFrom, { data: undefined, rowSpan: matrix.rowCount - rowFrom + 1, colSpan: _colSpan })
 
       // 层排
       let currentRowFrom = rowFrom
       for (const keyData of keyDataArray) {
-        const _rowSpan = dataToCompactMatrix(props.meta, keyData, matrix, currentRowFrom, currentColFrom)
+        const _rowSpan = dataToCompactMatrix(props.meta, keyData, matrix, currentRowFrom, currentColFrom, metaSizeMap)
         currentRowFrom += _rowSpan
       }
 
