@@ -5,19 +5,28 @@ const countDataMatrixSize = require('./countDataMatrixSize')
 function dataToMatrix (meta, data) {
   const [rowSpan, colSpan] = countDataMatrixSize(meta, data)
   const matrix = new Matrix(rowSpan, colSpan).fill(false)
-  dataToExpandedMatrix(meta, data, matrix, 1, 1)
+  const [, , metaSizeMap] = countMetaMatrixSize(meta)
+  dataToExpandedMatrix(meta, data, matrix, 1, metaSizeMap)
   return matrix
 }
 
 // 扩展的dataToMatrix实现，该实现会扩展孤单数据直到最后一行。
 // 因为只会从第一行调用该函数，所以只需要提供colFrom参数。
 // 该实现返回实际占用的colSpan。
-function dataToExpandedMatrix (meta, data, matrix, colFrom) {
+// 特例：
+// - data可能是undefined
+function dataToExpandedMatrix (meta, data, matrix, colFrom, metaSizeMap) {
+  if (!data) {
+    const [_, colSpan] = metaSizeMap.get(meta)
+    matrix.set(1, colFrom, { data: undefined, rowSpan: matrix.rowCount, colSpan: colSpan })
+    return colSpan
+  }
+
   let currentColFrom = colFrom
 
   for (const key of meta.order) {
     const props = meta.mapping[key]
-    if (props.meta && ('length' in data[key])) {
+    if (props.meta && Array.isArray(data[key])) {
       // 对象数组
       const keyDataArray = data[key]
 
@@ -38,7 +47,7 @@ function dataToExpandedMatrix (meta, data, matrix, colFrom) {
       const keyData = data[key]
 
       // 单排
-      const _colSpan = dataToExpandedMatrix(props.meta, keyData, matrix, currentColFrom)
+      const _colSpan = dataToExpandedMatrix(props.meta, keyData, matrix, currentColFrom, metaSizeMap)
 
       currentColFrom += _colSpan
     } else {
@@ -65,7 +74,7 @@ function dataToCompactMatrix (meta, data, matrix, rowFrom, colFrom) {
     if (props.meta) {
       // 统一为对象数组
       const keyDataArray = data[key]
-      if (!('length' in keyDataArray)) {
+      if (Array.isArray(keyDataArray)) {
         keyDataArray = [keyDataArray]
       }
 

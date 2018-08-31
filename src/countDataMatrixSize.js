@@ -1,5 +1,5 @@
 // data must be object
-function countDataMatrixSize (meta, data) {
+function countDataMatrixSize (meta, data = {}) {
   let totalRowSpan = 0
   let totalColSpan = 0
   for (const key of meta.order) {
@@ -7,7 +7,7 @@ function countDataMatrixSize (meta, data) {
     if (props.meta) {
       // 统一按照数组处理
       let keyDataArray = data[key]
-      if (!('length' in keyDataArray)) {
+      if (!Array.isArray(keyDataArray)) {
         keyDataArray = [keyDataArray]
       }
 

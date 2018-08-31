@@ -44,6 +44,28 @@ test('convert nested json', t => {
   ]))
 })
 
+test('convert nested undefined', t => {
+  const matrix = dataToMatrix(meta.nested, { a: 1 }) // b is undefined
+  t.deepEqual(matrix, new Matrix([
+    [ 
+      { data: 1, rowSpan: 1, colSpan: 1 },
+      { data: undefined, rowSpan: 1, colSpan: 2 },
+      false
+    ]
+  ]))
+})
+
+test('convert total undefined', t => {
+  const matrix = dataToMatrix(meta.nested, undefined)
+  t.deepEqual(matrix, new Matrix([
+    [ 
+      { data: undefined, rowSpan: 1, colSpan: 3 },
+      false,
+      false
+    ]
+  ]))
+})
+
 test('convert nested object array', t => {
   const matrix = dataToMatrix(meta.nested, data.nestedObjectArray[0])
   t.deepEqual(matrix, new Matrix([

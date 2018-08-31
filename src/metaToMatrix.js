@@ -3,7 +3,7 @@ const countMetaMatrixSize = require('./countMetaMatrixSize')
 
 function metaToMatrix (meta) {
   const [rowSpan, colSpan] = countMetaMatrixSize(meta)
-  const matrix = new Matrix(rowSpan, colSpan)
+  const matrix = new Matrix(rowSpan, colSpan) // TODO: .fill(false)
   metaToMatrixHelper(meta, matrix, 1, 1)
   return matrix
 }
