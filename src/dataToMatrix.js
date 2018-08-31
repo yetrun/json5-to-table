@@ -32,10 +32,6 @@ function dataToExpandedMatrix (meta, data, matrix, colFrom, metaSizeMap) {
       // 对象数组
       const keyDataArray = data[key]
 
-      // 将该区域全部merge留白
-      const [, _colSpan] = metaSizeMap.get(props.meta)
-      matrix.set(1, currentColFrom, { data: undefined, rowSpan: matrix.rowCount, colSpan: _colSpan })
-
       // 紧凑层排
       let currentRowFrom = 1
       for (const keyData of keyDataArray) {
@@ -43,7 +39,14 @@ function dataToExpandedMatrix (meta, data, matrix, colFrom, metaSizeMap) {
         currentRowFrom += _rowSpan
       }
 
-      currentColFrom += _colSpan
+      // 余下区域merge留白
+      const [, colSpan] = metaSizeMap.get(props.meta)
+      if (currentRowFrom <= matrix.rowCount) {
+        matrix.set(currentRowFrom, currentColFrom, 
+          { data: undefined, rowSpan: matrix.rowCount - currentRowFrom + 1, colSpan: colSpan })
+      }
+
+      currentColFrom += colSpan
     } else if (props.meta) {
       // 对象
       const keyData = data[key]
@@ -64,9 +67,16 @@ function dataToExpandedMatrix (meta, data, matrix, colFrom, metaSizeMap) {
 }
 
 // 紧凑的dataToMatrix实现，该实现仅仅会扩展孤单数据到实际占用的行。
-// 余下的空白区域会merge.
-// 同时该实现返回实际占用的rowSpan（不包括余下的空白区域 ）。
+// 余下的空白区域不会做任何处理。
+// 同时该实现返回实际占用的rowSpan。
 function dataToCompactMatrix (meta, data, matrix, rowFrom, colFrom, metaSizeMap) {
+  if (!data) {
+    // TODO: data不是对象或数组
+    const [_, colSpan] = metaSizeMap.get(meta)
+    matrix.set(1, colFrom, { data: undefined, rowSpan: 1, colSpan: colSpan })
+    return 1
+  }
+
   const unsetRowSpans = []
   let maxRowSpan = 0
   let currentColFrom = colFrom
@@ -80,18 +90,12 @@ function dataToCompactMatrix (meta, data, matrix, rowFrom, colFrom, metaSizeMap)
         keyDataArray = [keyDataArray]
       }
 
-      // 将该区域全部merge留白
-      const [, _colSpan] = metaSizeMap.get(props.meta)
-      matrix.set(rowFrom, currentColFrom, { data: undefined, rowSpan: matrix.rowCount - rowFrom + 1, colSpan: _colSpan })
-
       // 层排
       let currentRowFrom = rowFrom
       for (const keyData of keyDataArray) {
         const _rowSpan = dataToCompactMatrix(props.meta, keyData, matrix, currentRowFrom, currentColFrom, metaSizeMap)
         currentRowFrom += _rowSpan
       }
-
-      // 因为余下的自动占位了，所以余下的不用处理
 
       maxRowSpan = Math.max(maxRowSpan, currentRowFrom - rowFrom)
       currentColFrom += colSpan

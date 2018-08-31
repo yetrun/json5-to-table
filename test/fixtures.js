@@ -81,14 +81,82 @@ const nestedObjectArrayData = [
   },
 ]
 
+const complexNestedMeta = {
+  order: ['a', 'b', 'c'],
+  mapping: {
+    a: {
+      title: 'A'
+    },
+    b: {
+      title: 'B',
+      meta: {
+        order: ['d', 'e'],
+        mapping: {
+          d: {
+            title: 'D'
+          },
+          e: {
+            title: 'E'
+          }
+        }
+      }
+    },
+    c: {
+      title: 'C',
+      meta: {
+        order: ['f', 'g'],
+        mapping: {
+          f: {
+            title: 'F'
+          },
+          g: {
+            title: 'G'
+          }
+        }
+      }
+    }
+  }
+}
+const complexNestedObjectArrayData = [
+  {
+    a: 1,
+    b: [
+      {
+        d: 2,
+        e: 3
+      },
+      {
+        d: 4,
+        e: 5
+      }
+    ],
+    c: [
+      {
+        f: 6,
+        g: 7
+      },
+      {
+        f: 8,
+        g: 9
+      },
+      {
+        f: 10,
+        g: 11
+      }
+    ]
+  }
+]
+
 module.exports = {
   meta: {
     simple: simpleMeta,
     nested: nestedMeta,
+    complexNested: complexNestedMeta
   },
   data: {
     simple: simpleData,
     nested: nestedData,
-    nestedObjectArray: nestedObjectArrayData
+    nestedObjectArray: nestedObjectArrayData,
+    complexNestedObjectArray: complexNestedObjectArrayData
   }
 }
