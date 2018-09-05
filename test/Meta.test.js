@@ -93,3 +93,46 @@ test('auto detect order and mapping from plain object', t => {
     }
   })
 })
+
+test('auto assign default mapping if not provided', t => {
+  const meta = new Meta({
+    order: ['a', 'b'],
+    mapping: {
+      a: {
+        title: 'A'
+      }
+    }
+  })
+  t.deepEqual(meta.toJSON(), {
+    order: ['a', 'b'],
+    mapping: {
+      a: {
+        title: 'A'
+      },
+      b: {
+        title: 'b'
+      }
+    }
+  })
+})
+
+test('auto assign string as title', t => {
+  const meta = new Meta({
+    order: ['a', 'b'],
+    mapping: {
+      a: 'A',
+      b: 'B'
+    }
+  })
+  t.deepEqual(meta.toJSON(), {
+    order: ['a', 'b'],
+    mapping: {
+      a: {
+        title: 'A'
+      },
+      b: {
+        title: 'B'
+      }
+    }
+  })
+})

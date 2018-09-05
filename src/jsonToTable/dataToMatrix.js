@@ -1,4 +1,4 @@
-const isPrimitive = require('../isPrimitive')
+const { isPrimitive } = require('../isTypes')
 const Matrix = require('../Matrix')
 const countMetaMatrixSize = require('./countMetaMatrixSize')
 const countDataMatrixSize = require('./countDataMatrixSize')

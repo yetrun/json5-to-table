@@ -1,19 +1,41 @@
+const { isString } = require('./isTypes')
+
 class Meta {
   constructor (metaObject) {
-    const [order, mapping] = get(metaObject)
+    const [order, mapping] = getOrderAndMapping(metaObject)
     this.order = order
-    this.mapping = mapping
+    this.mapping = getMapping(mapping)
   }
 
   toJSON () {
     return {
       order: this.order,
-      mapping: this.mapping
+      mapping: Object.keys(this.mapping).reduce((json, key) => {
+        json[key] = this.mapping[key].toJSON()
+        return json
+      }, {})
     }
   }
 }
 
-function get (object) {
+class Schema {
+  constructor (key, schema = {}) {
+    if (isString(schema)) {
+      schema = {
+        title: schema
+      }
+    }
+    this.title = schema.title || key
+  }
+
+  toJSON () {
+    return {
+      title: this.title
+    }
+  }
+}
+
+function getOrderAndMapping (object) {
   if (object.order) {
     const order = object.order
     const mapping = order.reduce((obj, key) => {
@@ -30,6 +52,13 @@ function get (object) {
     const mapping = object
     return [order, mapping]
   }
+}
+
+function getMapping (object) {
+  return Object.keys(object).reduce((mapping, key) => {
+    mapping[key] = new Schema(key, object[key])
+    return mapping
+  }, {})
 }
 
 module.exports = Meta
