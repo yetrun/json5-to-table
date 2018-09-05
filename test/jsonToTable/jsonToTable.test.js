@@ -1,5 +1,5 @@
 const test = require('ava')
-const jsonToTable = require('../src/jsonToTable')
+const jsonToTable = require('../../src/jsonToTable/jsonToTable')
 const Builder = require('./Builder')
 const { meta, data } = require('./fixtures')
 

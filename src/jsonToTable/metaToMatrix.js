@@ -1,4 +1,4 @@
-const Matrix = require('./Matrix')
+const Matrix = require('../Matrix')
 const countMetaMatrixSize = require('./countMetaMatrixSize')
 
 function metaToMatrix (meta) {

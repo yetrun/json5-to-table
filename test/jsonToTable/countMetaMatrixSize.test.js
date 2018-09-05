@@ -1,6 +1,6 @@
 const test = require('ava')
 const { meta } = require('./fixtures')
-const countMetaMatrixSize = require('../src/countMetaMatrixSize')
+const countMetaMatrixSize = require('../../src/jsonToTable/countMetaMatrixSize')
 
 test('count nested meta matrix size', t => {
   const [, , metaSizeMap] = countMetaMatrixSize(meta.nested)

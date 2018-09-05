@@ -7,7 +7,7 @@
   "author": "run27017",
   "license": "LGPL-2.1",
   "ava": {
-    "files": "test/*.test.js"
+    "files": "test/**/*.test.js"
   },
   "devDependencies": {
     "ava": "^0.25.0"
