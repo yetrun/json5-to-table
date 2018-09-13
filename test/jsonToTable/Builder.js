@@ -33,7 +33,8 @@ class Builder {
     this.current.push({
       data: data,
       rowSpan: at.rowSpan,
-      colSpan: at.colSpan
+      colSpan: at.colSpan,
+      isHead: at.isHead
     })
   }
 }

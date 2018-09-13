@@ -9,18 +9,18 @@ test('convert simple json', t => {
   t.deepEqual(builder.data, {
     head: [
       [
-        { data: 'A', rowSpan: 1, colSpan: 1 },
-        { data: 'B', rowSpan: 1, colSpan: 1 }
+        { data: 'A', rowSpan: 1, colSpan: 1, isHead: true },
+        { data: 'B', rowSpan: 1, colSpan: 1, isHead: true }
       ]
     ],
     body: [
       [
-        { data: 1, rowSpan: 1, colSpan: 1 },
-        { data: 2, rowSpan: 1, colSpan: 1 }
+        { data: 1, rowSpan: 1, colSpan: 1, isHead: false },
+        { data: 2, rowSpan: 1, colSpan: 1, isHead: false }
       ],
       [
-        { data: undefined, rowSpan: 1, colSpan: 1 },
-        { data: 3, rowSpan: 1, colSpan: 1 }
+        { data: undefined, rowSpan: 1, colSpan: 1, isHead: false },
+        { data: 3, rowSpan: 1, colSpan: 1, isHead: false }
       ]
     ]
   })
@@ -32,24 +32,24 @@ test('convert nested json', t => {
   t.deepEqual(builder.data, {
     head: [
       [
-        { data: 'A', rowSpan: 2, colSpan: 1 },
-        { data: 'B', rowSpan: 1, colSpan: 2 }
+        { data: 'A', rowSpan: 2, colSpan: 1, isHead: true },
+        { data: 'B', rowSpan: 1, colSpan: 2, isHead: true }
       ],
       [
-        { data: 'C', rowSpan: 1, colSpan: 1 },
-        { data: 'D', rowSpan: 1, colSpan: 1 }
+        { data: 'C', rowSpan: 1, colSpan: 1, isHead: true },
+        { data: 'D', rowSpan: 1, colSpan: 1, isHead: true }
       ]
     ],
     body: [
       [
-        { data: 1, rowSpan: 1, colSpan: 1 },
-        { data: 2, rowSpan: 1, colSpan: 1 },
-        { data: 3, rowSpan: 1, colSpan: 1 }
+        { data: 1, rowSpan: 1, colSpan: 1, isHead: false },
+        { data: 2, rowSpan: 1, colSpan: 1, isHead: false },
+        { data: 3, rowSpan: 1, colSpan: 1, isHead: false }
       ],
       [
-        { data: 4, rowSpan: 1, colSpan: 1 },
-        { data: 5, rowSpan: 1, colSpan: 1 },
-        { data: 6, rowSpan: 1, colSpan: 1 }
+        { data: 4, rowSpan: 1, colSpan: 1, isHead: false },
+        { data: 5, rowSpan: 1, colSpan: 1, isHead: false },
+        { data: 6, rowSpan: 1, colSpan: 1, isHead: false }
       ]
     ]
   })
@@ -61,28 +61,28 @@ test('convert nested object array', t => {
   t.deepEqual(builder.data, {
     head: [
       [
-        { data: 'A', rowSpan: 2, colSpan: 1 },
-        { data: 'B', rowSpan: 1, colSpan: 2 }
+        { data: 'A', rowSpan: 2, colSpan: 1, isHead: true },
+        { data: 'B', rowSpan: 1, colSpan: 2, isHead: true }
       ],
       [
-        { data: 'C', rowSpan: 1, colSpan: 1 },
-        { data: 'D', rowSpan: 1, colSpan: 1 }
+        { data: 'C', rowSpan: 1, colSpan: 1, isHead: true },
+        { data: 'D', rowSpan: 1, colSpan: 1, isHead: true }
       ]
     ],
     body: [
       [
-        { data: 1, rowSpan: 2, colSpan: 1 },
-        { data: 2, rowSpan: 1, colSpan: 1 },
-        { data: 3, rowSpan: 1, colSpan: 1 }
+        { data: 1, rowSpan: 2, colSpan: 1, isHead: false },
+        { data: 2, rowSpan: 1, colSpan: 1, isHead: false },
+        { data: 3, rowSpan: 1, colSpan: 1, isHead: false }
       ],
       [
-        { data: 4, rowSpan: 1, colSpan: 1 },
-        { data: 5, rowSpan: 1, colSpan: 1 }
+        { data: 4, rowSpan: 1, colSpan: 1, isHead: false },
+        { data: 5, rowSpan: 1, colSpan: 1, isHead: false }
       ],
       [
-        { data: 6, rowSpan: 1, colSpan: 1 },
-        { data: 7, rowSpan: 1, colSpan: 1 },
-        { data: 8, rowSpan: 1, colSpan: 1 }
+        { data: 6, rowSpan: 1, colSpan: 1, isHead: false },
+        { data: 7, rowSpan: 1, colSpan: 1, isHead: false },
+        { data: 8, rowSpan: 1, colSpan: 1, isHead: false }
       ],
     ]
   })
