@@ -26,11 +26,21 @@ class Schema {
       }
     }
     this.title = schema.title || key
+    if (schema.inner) {
+      this.inner = new Meta(schema.inner)
+    }
   }
 
   toJSON () {
-    return {
-      title: this.title
+    if (this.inner) {
+      return {
+        title: this.title,
+        inner: this.inner.toJSON()
+      }
+    } else {
+      return {
+        title: this.title,
+      }
     }
   }
 }

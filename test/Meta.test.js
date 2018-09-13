@@ -136,3 +136,94 @@ test('auto assign string as title', t => {
     }
   })
 })
+
+test('new meta from full nested meta', t => {
+  const meta = new Meta({
+    order: ['a', 'b'],
+    mapping: {
+      a: {
+        title: 'A'
+      },
+      b: {
+        title: 'B',
+        inner: {
+          order: ['c', 'd'],
+          mapping: {
+            c: {
+              title: 'C'
+            },
+            d: {
+              title: 'D'
+            }
+          }
+        }
+      }
+    }
+  })
+  t.deepEqual(meta.toJSON(), {
+    order: ['a', 'b'],
+    mapping: {
+      a: {
+        title: 'A'
+      },
+      b: {
+        title: 'B',
+        inner: {
+          order: ['c', 'd'],
+          mapping: {
+            c: {
+              title: 'C'
+            },
+            d: {
+              title: 'D'
+            }
+          }
+        }
+      }
+    }
+  })
+})
+
+test('inner meta still support simple syntax', t => {
+  const meta = new Meta({
+    order: ['a', 'b'],
+    mapping: {
+      a: {
+        title: 'A'
+      },
+      b: {
+        title: 'B',
+        inner: {
+          order: ['c', 'd'],
+          mapping: {
+            c: 'C',
+            d: 'D'
+          }
+        }
+      }
+    }
+  })
+  t.deepEqual(meta.toJSON(), {
+    order: ['a', 'b'],
+    mapping: {
+      a: {
+        title: 'A'
+      },
+      b: {
+        title: 'B',
+        inner: {
+          order: ['c', 'd'],
+          mapping: {
+            c: {
+              title: 'C'
+            },
+            d: {
+              title: 'D'
+            }
+          }
+        }
+      }
+    }
+  })
+})
+
