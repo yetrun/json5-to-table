@@ -1,7 +1,7 @@
 const test = require('ava')
 const dataToMatrix = require('../../src/jsonToTable/dataToMatrix')
 const Matrix = require('../../src/Matrix')
-const { meta, data } = require('./fixtures')
+const { meta, data } = require('../fixtures')
 
 test('convert simple json', t => {
   const matrix = dataToMatrix(meta.simple, data.simple[0])

@@ -1,7 +1,7 @@
 const test = require('ava')
 const jsonToTable = require('../../src/jsonToTable/jsonToTable')
 const Builder = require('./Builder')
-const { meta, data } = require('./fixtures')
+const { meta, data } = require('../fixtures')
 
 test('convert simple json', t => {
   const builder = new Builder()
