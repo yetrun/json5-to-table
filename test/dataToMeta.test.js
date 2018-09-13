@@ -25,3 +25,26 @@ test('nested data to meta', t => {
     }
   }))
 })
+
+test('simple array data to meta', t => {
+  const data = fixtures.data.simple
+  const meta = dataToMeta(data)
+  t.deepEqual(meta, new Meta({
+    order: ['a', 'b', 'c']
+  }))
+})
+
+test('nested array data to meta', t => {
+  const data = fixtures.data.nested
+  const meta = dataToMeta(data)
+  t.deepEqual(meta, new Meta({
+    order: ['a', 'b'],
+    mapping: {
+      b: {
+        inner: {
+          order: ['c', 'd', 'e']
+        }
+      }
+    }
+  }))
+})

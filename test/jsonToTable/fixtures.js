@@ -16,6 +16,10 @@ const simpleData = [
   },
   {
     b: 3
+  },
+  {
+    b: 4,
+    c: 5
   }
 ]
 
@@ -54,6 +58,12 @@ const nestedData = [
     b: {
       c: 5,
       d: 6
+    }
+  },
+  {
+    a: 7,
+    b: {
+      e: 8
     }
   }
 ]

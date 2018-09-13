@@ -5,7 +5,7 @@ const { meta, data } = require('./fixtures')
 
 test('convert simple json', t => {
   const builder = new Builder()
-  jsonToTable(meta.simple, data.simple, builder)
+  jsonToTable(meta.simple, data.simple.slice(0, 2), builder)
   t.deepEqual(builder.data, {
     head: [
       [
@@ -28,7 +28,7 @@ test('convert simple json', t => {
 
 test('convert nested json', t => {
   const builder = new Builder()
-  jsonToTable(meta.nested, data.nested, builder)
+  jsonToTable(meta.nested, data.nested.slice(0, 2), builder)
   t.deepEqual(builder.data, {
     head: [
       [
