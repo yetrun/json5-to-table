@@ -8,7 +8,13 @@ function isString(value) {
   return Object.prototype.toString.call(value) === "[object String]"
 }
 
+// https://github.com/jonschlinkert/isobject/blob/master/index.js
+function isObject(value) {
+  return !isPrimitive(value) && value != null && typeof value === 'object' && Array.isArray(value) === false
+}
+
 module.exports = {
   isPrimitive,
-  isString
+  isString,
+  isObject
 }
