@@ -48,3 +48,48 @@ test('nested array data to meta', t => {
     }
   }))
 })
+
+test('simple primitive array', t => {
+  const data = [
+    {
+      a: 1,
+      b: [2, 3]
+    },
+    {
+      a: 4,
+      b: [5, 6]
+    }
+  ]
+  const meta = dataToMeta(data)
+  t.deepEqual(meta, new Meta({
+    order: ['a', 'b']
+  }))
+})
+
+test('nested primitive array', t => {
+  const data = [
+    {
+      a: 1,
+      b: {
+        c: [2, 3]
+      }
+    },
+    {
+      a: 4,
+      b: {
+        c: [5, 6]
+      }
+    }
+  ]
+  const meta = dataToMeta(data)
+  t.deepEqual(meta, new Meta({
+    order: ['a', 'b'],
+    mapping: {
+      b: {
+        inner: {
+          order: ['c']
+        }
+      }
+    }
+  }))
+})
