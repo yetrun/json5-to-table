@@ -6,16 +6,6 @@ class Meta {
     this.order = order
     this.mapping = getMapping(mapping)
   }
-
-  toJSON () {
-    return {
-      order: this.order,
-      mapping: Object.keys(this.mapping).reduce((json, key) => {
-        json[key] = this.mapping[key].toJSON()
-        return json
-      }, {})
-    }
-  }
 }
 
 class Schema {
@@ -28,19 +18,6 @@ class Schema {
     this.title = schema.title || key
     if (schema.inner) {
       this.inner = new Meta(schema.inner)
-    }
-  }
-
-  toJSON () {
-    if (this.inner) {
-      return {
-        title: this.title,
-        inner: this.inner.toJSON()
-      }
-    } else {
-      return {
-        title: this.title,
-      }
     }
   }
 }

@@ -13,17 +13,9 @@ test('new meta from full simple meta', t => {
       }
     }
   })
-  t.deepEqual(meta.toJSON(), {
-    order: ['a', 'b'],
-    mapping: {
-      a: {
-        title: 'A'
-      },
-      b: {
-        title: 'B'
-      }
-    }
-  })
+  t.deepEqual(meta.order, ['a', 'b'])
+  t.is(meta.mapping.a.title, 'A')
+  t.is(meta.mapping.b.title, 'B')
 })
 
 test('auto filter not listed property of mapping', t => {
@@ -38,14 +30,7 @@ test('auto filter not listed property of mapping', t => {
       }
     }
   })
-  t.deepEqual(meta.toJSON(), {
-    order: ['a'],
-    mapping: {
-      a: {
-        title: 'A'
-      }
-    }
-  })
+  t.is(meta.mapping.b, undefined)
 })
 
 test('auto detect order from mapping', t => {
@@ -59,17 +44,7 @@ test('auto detect order from mapping', t => {
       }
     }
   })
-  t.deepEqual(meta.toJSON(), {
-    order: ['a', 'b'],
-    mapping: {
-      a: {
-        title: 'A'
-      },
-      b: {
-        title: 'B'
-      }
-    }
-  })
+  t.deepEqual(meta.order, ['a', 'b'])
 })
 
 test('auto detect order and mapping from plain object', t => {
@@ -81,17 +56,9 @@ test('auto detect order and mapping from plain object', t => {
       title: 'B'
     }
   })
-  t.deepEqual(meta.toJSON(), {
-    order: ['a', 'b'],
-    mapping: {
-      a: {
-        title: 'A'
-      },
-      b: {
-        title: 'B'
-      }
-    }
-  })
+  t.deepEqual(meta.order, ['a', 'b'])
+  t.is(meta.mapping.a.title, 'A')
+  t.is(meta.mapping.b.title, 'B')
 })
 
 test('auto assign default mapping if not provided', t => {
@@ -103,17 +70,7 @@ test('auto assign default mapping if not provided', t => {
       }
     }
   })
-  t.deepEqual(meta.toJSON(), {
-    order: ['a', 'b'],
-    mapping: {
-      a: {
-        title: 'A'
-      },
-      b: {
-        title: 'b'
-      }
-    }
-  })
+  t.is(meta.mapping.b.title, 'b')
 })
 
 test('auto assign string as title', t => {
@@ -124,17 +81,8 @@ test('auto assign string as title', t => {
       b: 'B'
     }
   })
-  t.deepEqual(meta.toJSON(), {
-    order: ['a', 'b'],
-    mapping: {
-      a: {
-        title: 'A'
-      },
-      b: {
-        title: 'B'
-      }
-    }
-  })
+  t.is(meta.mapping.a.title, 'A')
+  t.is(meta.mapping.b.title, 'B')
 })
 
 test('new meta from full nested meta', t => {
@@ -160,28 +108,17 @@ test('new meta from full nested meta', t => {
       }
     }
   })
-  t.deepEqual(meta.toJSON(), {
-    order: ['a', 'b'],
+  t.deepEqual(meta.mapping.b.inner, new Meta({
+    order: ['c', 'd'],
     mapping: {
-      a: {
-        title: 'A'
+      c: {
+        title: 'C'
       },
-      b: {
-        title: 'B',
-        inner: {
-          order: ['c', 'd'],
-          mapping: {
-            c: {
-              title: 'C'
-            },
-            d: {
-              title: 'D'
-            }
-          }
-        }
+      d: {
+        title: 'D'
       }
     }
-  })
+  }))
 })
 
 test('inner meta still support simple syntax', t => {
@@ -203,27 +140,7 @@ test('inner meta still support simple syntax', t => {
       }
     }
   })
-  t.deepEqual(meta.toJSON(), {
-    order: ['a', 'b'],
-    mapping: {
-      a: {
-        title: 'A'
-      },
-      b: {
-        title: 'B',
-        inner: {
-          order: ['c', 'd'],
-          mapping: {
-            c: {
-              title: 'C'
-            },
-            d: {
-              title: 'D'
-            }
-          }
-        }
-      }
-    }
-  })
+  const innerMeta = meta.mapping.b.inner
+  t.is(innerMeta.mapping.c.title, 'C')
+  t.is(innerMeta.mapping.d.title, 'D')
 })
-
