@@ -22,11 +22,12 @@ class Schema {
   }
 }
 
-function getOrderAndMapping (object) {
+function getOrderAndMapping (object = {}) {
   if (object.order) {
     const order = object.order
-    const mapping = order.reduce((obj, key) => {
-      obj[key] = object.mapping[key]
+    let mapping = object.mapping || {}
+    mapping = order.reduce((obj, key) => {
+      obj[key] = mapping[key]
       return obj
     }, {})
     return [order, mapping]
@@ -41,7 +42,7 @@ function getOrderAndMapping (object) {
   }
 }
 
-function getMapping (object) {
+function getMapping (object = {}) {
   return Object.keys(object).reduce((mapping, key) => {
     mapping[key] = new Schema(key, object[key])
     return mapping

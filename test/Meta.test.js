@@ -47,6 +47,14 @@ test('auto detect order from mapping', t => {
   t.deepEqual(meta.order, ['a', 'b'])
 })
 
+test('auto detect mapping from order', t => {
+  const meta = new Meta({
+    order: ['a', 'b']
+  })
+  t.is(meta.mapping.a.title, 'a')
+  t.is(meta.mapping.b.title, 'b')
+})
+
 test('auto detect order and mapping from plain object', t => {
   const meta = new Meta({
     a: {
