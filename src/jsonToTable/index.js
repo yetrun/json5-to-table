@@ -12,4 +12,4 @@ function intelligentJSONToTable (meta = null, data, builder) {
   return jsonToTable(meta, data, builder)
 }
 
-module.exports = jsonToTable
+module.exports = intelligentJSONToTable

@@ -16,8 +16,8 @@ class Schema {
       }
     }
     this.title = schema.title || key
-    if (schema.inner) {
-      this.inner = new Meta(schema.inner)
+    if (schema.meta) {
+      this.meta = new Meta(schema.meta)
     }
   }
 }

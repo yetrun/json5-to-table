@@ -102,7 +102,7 @@ test('new meta from full nested meta', t => {
       },
       b: {
         title: 'B',
-        inner: {
+        meta: {
           order: ['c', 'd'],
           mapping: {
             c: {
@@ -116,7 +116,7 @@ test('new meta from full nested meta', t => {
       }
     }
   })
-  t.deepEqual(meta.mapping.b.inner, new Meta({
+  t.deepEqual(meta.mapping.b.meta, new Meta({
     order: ['c', 'd'],
     mapping: {
       c: {
@@ -138,7 +138,7 @@ test('inner meta still support simple syntax', t => {
       },
       b: {
         title: 'B',
-        inner: {
+        meta: {
           order: ['c', 'd'],
           mapping: {
             c: 'C',
@@ -148,7 +148,7 @@ test('inner meta still support simple syntax', t => {
       }
     }
   })
-  const innerMeta = meta.mapping.b.inner
+  const innerMeta = meta.mapping.b.meta
   t.is(innerMeta.mapping.c.title, 'C')
   t.is(innerMeta.mapping.d.title, 'D')
 })
