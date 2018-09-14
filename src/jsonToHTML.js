@@ -41,11 +41,17 @@ class HTMLBuilder {
 
   col(data, at) {
     data = isUndef(data) ? '' : data
-    if (at.isHead) {
-      this.writeLine('<th>' + data + '</th>')
-    } else {
-      this.writeLine('<td>' + data + '</td>')
+    const tagName = at.isHead ? 'th' : 'td'
+    let line = '<' + tagName
+    if (at.rowSpan > 1) {
+      line += ` rowSpan="${at.rowSpan}"`
     }
+    if (at.colSpan > 1) {
+      line += ` colSpan="${at.colSpan}"`
+    }
+    line += '>' + data + '</' + tagName + '>'
+
+    this.writeLine(line)
   }
 
   writeLine (line) {
