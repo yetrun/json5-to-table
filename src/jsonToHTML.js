@@ -1,69 +1,47 @@
-const { isUndef } = require('./isTypes')
+const xmlbuilder = require('xmlbuilder')
 const jsonToTable = require('./jsonToTable')
 
 class HTMLBuilder {
-  constructor () {
-    this.indent = 0
-    this.source = ''
-  }
-
   table(next) {
-    this.writeLine('<table>')
-    this.indent++
+    this.xmlbuilder = xmlbuilder.create('table', null, null, { headless: true, allowEmpty: true })
     next()
-    this.indent--
-    this.writeLine('</table>')
   }
 
   head(next) {
-    this.writeLine('<thead>')
-    this.indent++
+    this.xmlbuilder = this.xmlbuilder.ele('thead')
     next()
-    this.indent--
-    this.writeLine('</thead>')
+    this.xmlbuilder = this.xmlbuilder.up()
   }
 
   body(next) {
-    this.writeLine('<tbody>')
-    this.indent++
+    this.xmlbuilder = this.xmlbuilder.ele('tbody')
     next()
-    this.indent--
-    this.writeLine('</tbody>')
+    this.xmlbuilder = this.xmlbuilder.up()
   }
 
   row(next) {
-    this.writeLine('<tr>')
-    this.indent++
+    this.xmlbuilder = this.xmlbuilder.ele('tr')
     next()
-    this.indent--
-    this.writeLine('</tr>')
+    this.xmlbuilder = this.xmlbuilder.up()
   }
 
   col(data, at) {
-    data = isUndef(data) ? '' : data
     const tagName = at.isHead ? 'th' : 'td'
-    let line = '<' + tagName
+    const attrs = {}
     if (at.rowSpan > 1) {
-      line += ` rowSpan="${at.rowSpan}"`
+      attrs.rowSpan = at.rowSpan
     }
     if (at.colSpan > 1) {
-      line += ` colSpan="${at.colSpan}"`
+      attrs.colSpan = at.colSpan
     }
-    line += '>' + data + '</' + tagName + '>'
-
-    this.writeLine(line)
-  }
-
-  writeLine (line) {
-    const spaces = new Array(this.indent * 2).fill(' ').join('')
-    this.source += `${spaces}${line}\n`
+    this.xmlbuilder = this.xmlbuilder.ele(tagName, attrs, data).up()
   }
 }
 
 function jsonToHTML (meta, data) {
   const builder = new HTMLBuilder()
   jsonToTable(meta, data, builder)
-  return builder.source
+  return builder.xmlbuilder.end({ pretty: true, allowEmpty: true })
 }
 
 module.exports = jsonToHTML

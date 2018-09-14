@@ -2,8 +2,6 @@ const test = require('ava')
 const jsonToHTML = require('../src/jsonToHTML')
 const { meta, data } = require('./fixtures')
 
-// TODO: 使用[sax-js](https://github.com/isaacs/sax-js/)写一个xml2node工具
-
 test('simple json to html source', t => {
   const html = jsonToHTML(meta.simple, data.simple.slice(0, 2))
   const expected = `<table>
@@ -23,8 +21,7 @@ test('simple json to html source', t => {
       <td>3</td>
     </tr>
   </tbody>
-</table>
-`
+</table>`
   t.is(html, expected)
 })
 
@@ -53,7 +50,6 @@ test('nested json to html source', t => {
       <td>6</td>
     </tr>
   </tbody>
-</table>
-`
+</table>`
   t.is(html, expected)
 })

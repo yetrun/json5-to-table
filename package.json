@@ -11,5 +11,8 @@
   },
   "devDependencies": {
     "ava": "^0.25.0"
+  },
+  "dependencies": {
+    "xmlbuilder": "^10.0.0"
   }
 }
