@@ -4,7 +4,7 @@ const dataToMeta = require('../dataToMeta')
 
 function intelligentJSONToTable (meta = null, data, builder) {
   if (meta === null) {
-    meta = dataToMeta(meta)
+    meta = dataToMeta(data)
   } else if (!(meta instanceof Meta)) {
     meta = new Meta(meta)
   }
