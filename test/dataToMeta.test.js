@@ -18,7 +18,7 @@ test('nested data to meta', t => {
     order: ['a', 'b'],
     mapping: {
       b: {
-        inner: {
+        meta: {
           order: ['c', 'd']
         }
       }
@@ -41,7 +41,7 @@ test('nested array data to meta', t => {
     order: ['a', 'b'],
     mapping: {
       b: {
-        inner: {
+        meta: {
           order: ['c', 'd', 'e']
         }
       }
@@ -86,7 +86,7 @@ test('nested primitive array', t => {
     order: ['a', 'b'],
     mapping: {
       b: {
-        inner: {
+        meta: {
           order: ['c']
         }
       }

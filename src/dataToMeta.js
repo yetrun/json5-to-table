@@ -22,7 +22,7 @@ function objectToMeta (data) {
     obj[key] = { title: key } 
     const value = data[key]
     if (isObject(value)) {
-      obj[key].inner = objectToMeta(value)
+      obj[key].meta = objectToMeta(value)
     }
     return obj
   }, {})
@@ -64,8 +64,8 @@ function mergeSchema (schema1, schema2) {
     const schema = {
       title: schema1.title
     }
-    if (schema1.inner || schema2.inner) {
-      schema.inner = mergeMeta(schema1.inner, schema2.inner)
+    if (schema1.meta || schema2.meta) {
+      schema.meta = mergeMeta(schema1.meta, schema2.meta)
     }
     return schema
   }
