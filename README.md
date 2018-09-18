@@ -11,7 +11,8 @@
 3.1\.  [Meta简写格式](#meta简写格式)  
 3.2\.  [自定义Builder](#自定义builder)  
 4\.  [依赖](#依赖)  
-4.1\.  [生成文档](#生成文档)  
+4.1\.  [Node版本](#node版本)  
+4.2\.  [生成文档](#生成文档)  
 5\.  [License](#license)  
 
 <a name="快速使用"></a>
@@ -702,9 +703,15 @@ jsonToTable(data, builder)
 
 ## 4\. 依赖
 
+<a name="node版本"></a>
+
+### 4.1\. Node版本
+
+v8.11.1
+
 <a name="生成文档"></a>
 
-### 4.1\. 生成文档
+### 4.2\. 生成文档
 
     pip install MarkdownPP
 
