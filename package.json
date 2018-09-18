@@ -6,6 +6,10 @@
   "repository": "https://gitee.com/run27017/json-to-table",
   "author": "run27017",
   "license": "LGPL-2.1",
+  "scripts": {
+    "build:doc": "cd docs && markdown-pp index.mdpp -o ../README.md",
+    "test": "ava"
+  },
   "ava": {
     "files": "test/**/*.test.js"
   },

@@ -1,0 +1,18 @@
+# json-to-table
+
+支持任意嵌套格式的JSON数据转化为表格显示，嵌套的JSON会以合并的单元格形式展示。
+
+!INCLUDE "快速使用.md"
+!INCLUDE "更多的JSON格式.md"
+!INCLUDE "定义Meta.md"
+!INCLUDE "自定义Builder.md"
+
+## 依赖
+
+### 生成文档
+
+    pip install MarkdownPP
+
+## License
+
+LGPL-2.1
