@@ -3,7 +3,7 @@
 我们可以规定Meta的格式来收获我们想要的格式。如简单的格式：
 
 ```js
-const { jsonToHTML } = require('json-to-table')
+const { jsonToHTML } = require('nestd-json-to-table')
 
 const meta = {
   order: ['a', 'b'],
@@ -79,7 +79,7 @@ console.log(html)
 再如嵌套的格式：
 
 ```js
-const { jsonToHTML } = require('json-to-table')
+const { jsonToHTML } = require('nested-json-to-table')
 
 const meta = {
   order: ['a', 'b'],

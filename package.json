@@ -1,15 +1,20 @@
 {
-  "name": "json-to-table",
-  "version": "0.0.0",
+  "name": "nested-json-to-table",
+  "version": "0.0.1",
   "description": "一个将JSON数据转化为Table格式的工具",
   "main": "src/index.js",
-  "repository": "https://gitee.com/run27017/json-to-table",
+  "repository": "https://gitee.com/run27017/nested-json-to-table",
   "author": "run27017",
   "license": "LGPL-2.1",
   "scripts": {
     "build:doc": "cd docs && markdown-pp index.mdpp -o ../README.md",
     "test": "ava"
   },
+  "keywords": [
+    "json",
+    "table",
+    "nested"
+  ],
   "ava": {
     "files": "test/**/*.test.js"
   },

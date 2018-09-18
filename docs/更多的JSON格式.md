@@ -111,6 +111,7 @@ const data = [
 
 <details>
 <summary>点击查看生成源码</summary>
+
 ```html
 <table>
   <thead>

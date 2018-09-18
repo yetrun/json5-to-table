@@ -3,7 +3,7 @@
 输出HTML源码只是工具提供的最基本的格式。实际上，可以通过编写Builder支持更多的输出格式，如Excel等等。下面是一个简单的示例，它输出`<table>`、`<row>`、`<col>`这样的XML格式。
 
 ```js
-const { jsonToTable } = require('json-to-table')
+const { jsonToTable } = require('nested-json-to-table')
 
 class Builder {
   constructor () {

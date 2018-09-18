@@ -1,17 +1,31 @@
-# json-to-table
+# nested-json-to-table
 
 支持任意嵌套格式的JSON数据转化为表格显示，嵌套的JSON会以合并的单元格形式展示。
 
-## 快速使用
+1\.  [快速使用](#快速使用)  
+2\.  [更多的JSON格式](#更多的json格式)  
+2.1\.  [简单格式](#简单格式)  
+2.2\.  [嵌套格式](#嵌套格式)  
+2.3\.  [更复杂的嵌套数组的格式](#更复杂的嵌套数组的格式)  
+3\.  [定义Meta](#定义meta)  
+3.1\.  [Meta简写格式](#meta简写格式)  
+3.2\.  [自定义Builder](#自定义builder)  
+4\.  [依赖](#依赖)  
+4.1\.  [生成文档](#生成文档)  
+5\.  [License](#license)  
+
+<a name="快速使用"></a>
+
+## 1\. 快速使用
 
 安装
 
-    npm install json-to-table --save
+    npm install nested-json-to-table --save
 
 引入
 
 ```js
-const { jsonToHTML } = require('json-to-table')
+const { jsonToHTML } = require('nested-json-to-table')
 
 const data = [
   {
@@ -89,9 +103,15 @@ console.log(html)
   </tbody>
 </table>
 ```
-</details>## 更多的JSON格式
+</details>
 
-### 简单格式
+<a name="更多的json格式"></a>
+
+## 2\. 更多的JSON格式
+
+<a name="简单格式"></a>
+
+### 2.1\. 简单格式
 
 ```js
 const data = [
@@ -152,7 +172,9 @@ const data = [
 ```
 </details>
 
-### 嵌套格式
+<a name="嵌套格式"></a>
+
+### 2.2\. 嵌套格式
 
 ```js
 const data = [
@@ -202,6 +224,7 @@ const data = [
 
 <details>
 <summary>点击查看生成源码</summary>
+
 ```html
 <table>
   <thead>
@@ -230,7 +253,9 @@ const data = [
 ```
 </details>
 
-### 更复杂的嵌套数组的格式
+<a name="更复杂的嵌套数组的格式"></a>
+
+### 2.3\. 更复杂的嵌套数组的格式
 
 ```js
 const data = [
@@ -343,7 +368,10 @@ const data = [
 </table>
 ```
 </details>
-## 定义Meta
+
+<a name="定义meta"></a>
+
+## 3\. 定义Meta
 
 我们可以规定Meta的格式来收获我们想要的格式。如简单的格式：
 
@@ -526,7 +554,9 @@ console.log(html)
 ```
 </details>
 
-### Meta简写格式
+<a name="meta简写格式"></a>
+
+### 3.1\. Meta简写格式
 
 如果只有一个title属性，则Meta可以简写为：
 
@@ -570,7 +600,10 @@ const meta2 = {
   }
 }
 ```
-### 自定义Builder
+
+<a name="自定义builder"></a>
+
+### 3.2\. 自定义Builder
 
 输出HTML源码只是工具提供的最基本的格式。实际上，可以通过编写Builder支持更多的输出格式，如Excel等等。下面是一个简单的示例，它输出`<table>`、`<row>`、`<col>`这样的XML格式。
 
@@ -665,12 +698,18 @@ jsonToTable(data, builder)
     - `colSpan`：该单元格横跨的列数
     - `isHead`：该单元格是否位于表头，否则就在表体内
 
-## 依赖
+<a name="依赖"></a>
 
-### 生成文档
+## 4\. 依赖
+
+<a name="生成文档"></a>
+
+### 4.1\. 生成文档
 
     pip install MarkdownPP
 
-## License
+<a name="license"></a>
+
+## 5\. License
 
 LGPL-2.1
