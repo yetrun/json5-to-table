@@ -93,3 +93,25 @@ test('more complex nested json to html source', t => {
 </table>`
   t.is(html, expected)
 })
+
+test('json to html ignoring meta', t => {
+  const html = jsonToHTML(data.simple.slice(0, 2))
+  t.is(html, `<table>
+  <thead>
+    <tr>
+      <th>a</th>
+      <th>b</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>3</td>
+    </tr>
+  </tbody>
+</table>`)
+})

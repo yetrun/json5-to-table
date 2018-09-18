@@ -39,6 +39,10 @@ class HTMLBuilder {
 }
 
 function jsonToHTML (meta, data) {
+  if (arguments.length === 1) {
+    return jsonToHTML(null, arguments[0])
+  }
+
   const builder = new HTMLBuilder()
   jsonToTable(meta, data, builder)
   return builder.xmlbuilder.end({ pretty: true, allowEmpty: true })
