@@ -15,7 +15,7 @@ function metaToHead (meta, builder) {
       builder.row(() => {
         row.forEach(item => {
           if (item) {
-            builder.col(item.title, { rowSpan: item.rowSpan, colSpan: item.colSpan, isHead: true })
+            builder.cell(item.title, { rowSpan: item.rowSpan, colSpan: item.colSpan, isHead: true })
           }
         })
       })
@@ -31,7 +31,7 @@ function dataToBody (meta, data, builder) {
         builder.row(() => {
           row.forEach(item => {
             if (item) {
-              builder.col(item.data, { rowSpan: item.rowSpan, colSpan: item.colSpan, isHead: false })
+              builder.cell(item.data, { rowSpan: item.rowSpan, colSpan: item.colSpan, isHead: false })
             }
           })
         })

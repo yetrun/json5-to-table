@@ -25,7 +25,7 @@ class HTMLBuilder {
     this.xmlbuilder = this.xmlbuilder.up()
   }
 
-  col(data, at) {
+  cell(data, at) {
     const tagName = at.isHead ? 'th' : 'td'
     const attrs = {}
     if (at.rowSpan > 1) {

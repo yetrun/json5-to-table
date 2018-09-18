@@ -29,7 +29,7 @@ class Builder {
     this.current = previous
   }
 
-  col(data, at) {
+  cell(data, at) {
     this.current.push({
       data: data,
       rowSpan: at.rowSpan,
