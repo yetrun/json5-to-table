@@ -53,3 +53,43 @@ test('nested json to html source', t => {
 </table>`
   t.is(html, expected)
 })
+
+test('more complex nested json to html source', t => {
+  const html = jsonToHTML(meta.complexNested, data.complexNestedObjectArray.slice(0, 1))
+  const expected=`<table>
+  <thead>
+    <tr>
+      <th rowSpan="2">A</th>
+      <th colSpan="2">B</th>
+      <th colSpan="2">C</th>
+    </tr>
+    <tr>
+      <th>D</th>
+      <th>E</th>
+      <th>F</th>
+      <th>G</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td rowSpan="3">1</td>
+      <td>2</td>
+      <td>3</td>
+      <td>6</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>5</td>
+      <td>8</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <td colSpan="2"></td>
+      <td>10</td>
+      <td>11</td>
+    </tr>
+  </tbody>
+</table>`
+  t.is(html, expected)
+})

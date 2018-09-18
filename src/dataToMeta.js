@@ -23,6 +23,11 @@ function objectToMeta (data) {
     const value = data[key]
     if (isObject(value)) {
       obj[key].meta = objectToMeta(value)
+    } else if (Array.isArray(value)) {
+      const array = value.filter(v => isObject(v))
+      if (array.length > 0) {
+        obj[key].meta = arrayToMeta(array)
+      }
     }
     return obj
   }, {})

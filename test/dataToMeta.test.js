@@ -93,3 +93,18 @@ test('nested primitive array', t => {
     }
   }))
 })
+
+test('nested object array', t => {
+  const data = fixtures.data.nestedObjectArray[0]
+  const meta = dataToMeta(data)
+  t.deepEqual(meta, new Meta({
+    order: ['a', 'b'],
+    mapping: {
+      b: {
+        meta: {
+          order: ['c', 'd']
+        }
+      }
+    }
+  }))
+})
