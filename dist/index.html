@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>测试浏览器打包效果</title>
+  <style>
+    table,table tr th, table tr td { 
+      border:1px solid #0094ff; 
+    }
+    table { 
+      width: 200px; 
+      min-height: 25px; 
+      line-height: 25px; 
+      text-align: center; 
+      border-collapse: collapse; padding:2px;
+    }
+  </style>
+</head>
+<body>
+<script src="./nested-json-to-table.js"></script>
+<script>
+  var jsonToHTML = NestedJSONToTable.jsonToHTML;
+  var data = [
+    {
+      a: 1,
+      b: {
+        c: 2,
+        d: 3
+      }
+    },
+    {
+      a: 4,
+      b: {
+        c: 5,
+        d: 6
+      }
+    }
+  ];
+  var html = jsonToHTML(data);
+  document.write(html)
+</script>
+</body>
+</html>

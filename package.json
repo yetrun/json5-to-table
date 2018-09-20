@@ -7,6 +7,7 @@
   "author": "run27017",
   "license": "LGPL-2.1",
   "scripts": {
+    "build:browser": "webpack",
     "build:doc": "cd docs && markdown-pp index.mdpp -o ../README.md",
     "test": "ava"
   },
@@ -19,7 +20,13 @@
     "files": "test/**/*.test.js"
   },
   "devDependencies": {
-    "ava": "^0.25.0"
+    "@babel/core": "^7.1.0",
+    "@babel/polyfill": "^7.0.0",
+    "@babel/preset-env": "^7.1.0",
+    "ava": "^0.25.0",
+    "babel-loader": "^8.0.2",
+    "webpack": "^4.19.1",
+    "webpack-cli": "^3.1.0"
   },
   "dependencies": {
     "xmlbuilder": "^10.0.0"
