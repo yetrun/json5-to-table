@@ -2,8 +2,13 @@ const xmlbuilder = require('xmlbuilder')
 const jsonToTable = require('./jsonToTable')
 
 class HTMLBuilder {
+  constructor ({ tableAttrs }) {
+    this.tableAttrs = tableAttrs || {}
+  }
+
   table(next) {
     this.xmlbuilder = xmlbuilder.create('table', null, null, { headless: true, allowEmpty: true })
+    this.xmlbuilder.att(this.tableAttrs)
     next()
   }
 
@@ -38,12 +43,12 @@ class HTMLBuilder {
   }
 }
 
-function jsonToHTML (meta, data) {
+function jsonToHTML (meta, data, tableAttrs = {}) {
   if (arguments.length === 1) {
     return jsonToHTML(null, arguments[0])
   }
 
-  const builder = new HTMLBuilder()
+  const builder = new HTMLBuilder({ tableAttrs })
   jsonToTable(meta, data, builder)
   return builder.xmlbuilder.end({ pretty: true, allowEmpty: true })
 }

@@ -115,3 +115,25 @@ test('json to html ignoring meta', t => {
   </tbody>
 </table>`)
 })
+
+test('table attrs', t => {
+  const html = jsonToHTML(undefined, data.simple.slice(0, 2), { class: 'table', border: "1" })
+  t.is(html, `<table class="table" border="1">
+  <thead>
+    <tr>
+      <th>a</th>
+      <th>b</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>3</td>
+    </tr>
+  </tbody>
+</table>`)
+})
