@@ -12,6 +12,8 @@
 
 !INCLUDE "自定义Builder.md"
 
+!INCLUDE "函数列表.md"
+
 ## 依赖
 
 ### Node版本

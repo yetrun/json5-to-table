@@ -1,6 +1,6 @@
 {
   "name": "nested-json-to-table",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "一个将JSON数据转化为Table格式的工具",
   "main": "src/index.js",
   "repository": "https://gitee.com/run27017/nested-json-to-table",

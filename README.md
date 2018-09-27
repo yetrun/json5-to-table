@@ -2,22 +2,25 @@
 
 支持任意嵌套格式的JSON数据转化为表格显示，嵌套的JSON会以合并的单元格形式展示。
 
-1\.  [快速使用](#快速使用)  
-2\.  [更多的JSON格式](#更多的json格式)  
-2.1\.  [简单格式](#简单格式)  
-2.2\.  [嵌套格式](#嵌套格式)  
-2.3\.  [更复杂的嵌套数组的格式](#更复杂的嵌套数组的格式)  
-3\.  [定义Meta](#定义meta)  
-3.1\.  [Meta简写格式](#meta简写格式)  
-3.2\.  [自定义Builder](#自定义builder)  
-4\.  [依赖](#依赖)  
-4.1\.  [Node版本](#node版本)  
-4.2\.  [生成文档](#生成文档)  
-5\.  [License](#license)  
+0.1\.  [快速使用](#快速使用)  
+0.2\.  [更多的JSON格式](#更多的json格式)  
+0.2.1\.  [简单格式](#简单格式)  
+0.2.2\.  [嵌套格式](#嵌套格式)  
+0.2.3\.  [更复杂的嵌套数组的格式](#更复杂的嵌套数组的格式)  
+0.3\.  [定义Meta](#定义meta)  
+0.3.1\.  [Meta简写格式](#meta简写格式)  
+0.3.2\.  [自定义Builder](#自定义builder)  
+1\.  [函数列表](#函数列表)  
+1.1\.  [jsonToHTML](#jsontohtml)  
+1.2\.  [jsonToTable](#jsontotable)  
+1.3\.  [依赖](#依赖)  
+1.3.1\.  [Node版本](#node版本)  
+1.3.2\.  [生成文档](#生成文档)  
+1.4\.  [License](#license)  
 
 <a name="快速使用"></a>
 
-## 1\. 快速使用
+## 0.1\. 快速使用
 
 安装
 
@@ -108,11 +111,11 @@ console.log(html)
 
 <a name="更多的json格式"></a>
 
-## 2\. 更多的JSON格式
+## 0.2\. 更多的JSON格式
 
 <a name="简单格式"></a>
 
-### 2.1\. 简单格式
+### 0.2.1\. 简单格式
 
 ```js
 const data = [
@@ -175,7 +178,7 @@ const data = [
 
 <a name="嵌套格式"></a>
 
-### 2.2\. 嵌套格式
+### 0.2.2\. 嵌套格式
 
 ```js
 const data = [
@@ -256,7 +259,7 @@ const data = [
 
 <a name="更复杂的嵌套数组的格式"></a>
 
-### 2.3\. 更复杂的嵌套数组的格式
+### 0.2.3\. 更复杂的嵌套数组的格式
 
 ```js
 const data = [
@@ -372,7 +375,7 @@ const data = [
 
 <a name="定义meta"></a>
 
-## 3\. 定义Meta
+## 0.3\. 定义Meta
 
 我们可以规定Meta的格式来收获我们想要的格式。如简单的格式：
 
@@ -557,7 +560,7 @@ console.log(html)
 
 <a name="meta简写格式"></a>
 
-### 3.1\. Meta简写格式
+### 0.3.1\. Meta简写格式
 
 如果只有一个title属性，则Meta可以简写为：
 
@@ -604,7 +607,7 @@ const meta2 = {
 
 <a name="自定义builder"></a>
 
-### 3.2\. 自定义Builder
+### 0.3.2\. 自定义Builder
 
 输出HTML源码只是工具提供的最基本的格式。实际上，可以通过编写Builder支持更多的输出格式，如Excel等等。下面是一个简单的示例，它输出`<table>`、`<row>`、`<col>`这样的XML格式。
 
@@ -699,24 +702,62 @@ jsonToTable(data, builder)
     - `colSpan`：该单元格横跨的列数
     - `isHead`：该单元格是否位于表头，否则就在表体内
 
+<a name="函数列表"></a>
+
+# 1\. 函数列表
+
+<a name="jsontohtml"></a>
+
+## 1.1\. jsonToHTML
+
+    function jsonToTable(data)
+
+将data转化为HTML表格源码。
+
+    function jsonToTable(meta, data)
+
+将data转化为HTML表格源码，其中表头的部分通过meta定义。
+
+    function jsonToTable(meta, data, rootAttrs)
+
+将data转化为HTML表格源码，其中表头的部分通过meta定义。该调用可以附加一个根元素（即table）的属性列表。如下调用，最终生成的源码会是：
+
+    jsonToTable(meta, data, { class: 'class1 class2' })
+
+    // generate
+    // <table class="class1 class2">
+    //   ...
+
+<a name="jsontotable"></a>
+
+## 1.2\. jsonToTable
+
+    function jsonToTable(data, builder)
+
+利用自定义Builder，将data转化为table格式。关于自定义Builder的部分，可参考相关章节。
+
+    function jsonToTable(meta, data, builder)
+
+利用自定义Builder，将data转化为table格式。其中表头的部分通过meta定义。关于meta和自定义Builder的部分，可参考相关章节。
+
 <a name="依赖"></a>
 
-## 4\. 依赖
+## 1.3\. 依赖
 
 <a name="node版本"></a>
 
-### 4.1\. Node版本
+### 1.3.1\. Node版本
 
 v8.11.1
 
 <a name="生成文档"></a>
 
-### 4.2\. 生成文档
+### 1.3.2\. 生成文档
 
     pip install MarkdownPP
 
 <a name="license"></a>
 
-## 5\. License
+## 1.4\. License
 
 LGPL-2.1
