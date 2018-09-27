@@ -2,6 +2,16 @@
 
 支持任意嵌套格式的JSON数据转化为表格显示，嵌套的JSON会以合并的单元格形式展示。
 
+为了这个项目，特地做了个线上的JSON数据导出工具，可以导入JSON文件，预览导出效果以及导出为EXCEL。案例链接：
+
+- [示例1](https://json-to-table.run27.top/#example/1)
+- [示例2](https://json-to-table.run27.top/#example/2)
+- [示例3](https://json-to-table.run27.top/#example/3)
+
+线上导出工具请认准域名：
+
+> https://json-to-table.run27.top
+
 0.1\.  [快速使用](#快速使用)  
 0.2\.  [更多的JSON格式](#更多的json格式)  
 0.2.1\.  [简单格式](#简单格式)  
