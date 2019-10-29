@@ -3,12 +3,15 @@ import Render1 from '../lib/Render1'
 
 test('simple render', t => {
   const render = new Render1()
+  const head = {
+    keys: ['a', 'b', 'c']
+  }
   const data = [
-    { a: 1, b: 2, c: 3 },
-    { a: 4, b: 5, c: 6 }
+    { a: 1, b: 2, c: 3, d: 0 },
+    { a: 4, b: 5, c: 6, d: 0 }
   ]
 
-  render.init(data)
+  render.init(data, head)
   t.deepEqual(render.next(), { value: [
     { r: 1, c: 1, v: 'a' },
     { r: 1, c: 2, v: 'b' },
