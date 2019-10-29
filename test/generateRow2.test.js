@@ -7,7 +7,11 @@ test('simple generate', t => {
   const data = { a: 1, b: 2, c: 3 }
 
   const row = generateRow(data, props)
-  t.deepEqual(row, [ 1, 2, 3 ])
+  t.deepEqual(row, [
+    { v: 1 },
+    { v: 2 },
+    { v: 3 }
+  ])
 })
 
 test('nested generate', t => {
@@ -23,9 +27,12 @@ test('nested generate', t => {
 
   const cells = generateRow(data, props)
   t.deepEqual(cells, [
-    1,
-    [2, 3],
-    4
+    { v: 1 },
+    [
+      { v: 2 }, 
+      { v: 3 }
+    ],
+    { v: 4 }
   ])
 })
 
@@ -38,8 +45,16 @@ test('array generate', t => {
 
   const cells = generateRow(data, props)
   t.deepEqual(cells, [
-    [1, 2, 3],
-    [4, 5, 6]
+    [
+      { v: 1 }, 
+      { v: 2 },
+      { v: 3 }
+    ],
+    [
+      { v: 4 }, 
+      { v: 5 }, 
+      { v: 6 }
+    ]
   ])
 })
 
@@ -63,11 +78,16 @@ test('nested array generate', t => {
 
   const cells = generateRow(data, props)
   t.deepEqual(cells, [
-    1,
+    { v: 1 },
     [
-      [2, 3],
-      [4, 5]
+      [
+        { v: 2 }, 
+        { v: 3 }],
+      [
+        { v: 4 }, 
+        { v: 5 }
+      ]
     ],
-    6
+    { v: 6 }
   ])
 })
