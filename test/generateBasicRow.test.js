@@ -1,6 +1,6 @@
 // TODO: 如果语法错误没有具体的报错
 const test = require('ava')
-const generateRow = require('../lib/generateRow2')
+const generateRow = require('../lib/generateBasicRow')
 
 test('simple generate', t => {
   const props = [ { key: 'a' }, { key: 'b' }, { key: 'c' } ]
