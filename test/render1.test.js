@@ -23,6 +23,6 @@ test('simple render', t => {
     { r: 3, c: 1, v: 4 },
     { r: 3, c: 2, v: 5 },
     { r: 3, c: 3, v: 6 }
-  ], done: true })
+  ], done: false })
   t.deepEqual(render.next(), { value: undefined, done: true })
 })
