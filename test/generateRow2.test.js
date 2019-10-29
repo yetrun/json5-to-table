@@ -25,7 +25,7 @@ test('nested generate', t => {
   t.deepEqual(cells, [ 1, 2, 3, 4])
 })
 
-test.skip('array generate', t => {
+test('array generate', t => {
   const props = [ { key: 'a' }, { key: 'b' }, { key: 'c' } ]
   const data = [
     { a: 1, b: 2, c: 3 },
