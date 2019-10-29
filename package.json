@@ -4,5 +4,11 @@
   "description": "JSON 转化为表格的工具",
   "main": "index.js",
   "author": "run27017 <run27017@126.com>",
-  "license": "LGPL-2.1"
+  "license": "LGPL-2.1",
+  "scripts": {
+    "test": "ava"
+  },
+  "devDependencies": {
+    "ava": "^2.4.0"
+  }
 }
