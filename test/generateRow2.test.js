@@ -22,7 +22,11 @@ test('nested generate', t => {
   const data = { a: 1, b: { c: 2, d: 3 }, e: 4 }
 
   const cells = generateRow(data, props)
-  t.deepEqual(cells, [ 1, 2, 3, 4])
+  t.deepEqual(cells, [
+    1,
+    [2, 3],
+    4
+  ])
 })
 
 test('array generate', t => {
@@ -39,7 +43,7 @@ test('array generate', t => {
   ])
 })
 
-test.skip('nested array generate', t => {
+test('nested array generate', t => {
   const props = [
     { key: 'a' },
     { 
