@@ -1,6 +1,6 @@
 const test = require('ava')
 const generateTable = require('../lib/generateTable')
-const { Table, Row, Data } = require('../lib/table_body')
+const { Table, Row, Data } = require('../lib/table_defs')
 
 test('simple generate', t => {
   const props = [ { key: 'a' }, { key: 'b' }, { key: 'c' } ]
