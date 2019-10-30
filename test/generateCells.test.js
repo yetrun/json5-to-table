@@ -1,12 +1,12 @@
 // TODO: 如果语法错误没有具体的报错
 const test = require('ava')
-const generateRow = require('../lib/generateAddressableRow')
+const generateCells = require('../lib/generateCells')
 
 test('simple generate', t => {
   const props = [ { key: 'a' }, { key: 'b' }, { key: 'c' } ]
   const data = { a: 1, b: 2, c: 3 }
 
-  const cells = generateRow(data, props)
+  const cells = generateCells(data, props)
   t.deepEqual(cells, [
     { r: 1, c: 1, v: 1 },
     { r: 1, c: 2, v: 2 },
@@ -25,7 +25,7 @@ test('nested generate', t => {
   ]
   const data = { a: 1, b: { c: 2, d: 3 }, e: 4 }
 
-  const cells = generateRow(data, props)
+  const cells = generateCells(data, props)
   t.deepEqual(cells, [
     { r: 1, c: 1, v: 1 },
     { r: 1, c: 2, v: 2 },
@@ -41,7 +41,7 @@ test('array generate', t => {
     { a: 4, b: 5, c: 6 }
   ]
 
-  const cells = generateRow(data, props)
+  const cells = generateCells(data, props)
   t.deepEqual(cells, [
     { r: 1, c: 1, v: 1 },
     { r: 1, c: 2, v: 2 },
@@ -70,7 +70,7 @@ test('nested array generate', t => {
     e: 6
   }
 
-  const cells = generateRow(data, props)
+  const cells = generateCells(data, props)
   t.deepEqual(cells, [
     { r: 1, c: 1, rs: 2, v: 1 },
     { r: 1, c: 2, v: 2 },
