@@ -1,4 +1,3 @@
-// TODO: ava 如果语法错误没有具体的报错
 const test = require('ava')
 const generateTable = require('../lib/generateTable')
 const { Table, Row, Data } = require('../lib/table_body')
