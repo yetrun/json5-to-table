@@ -8,7 +8,7 @@ test('simple generate', t => {
 
   const table = generateTable(data, props)
   t.deepEqual(table, new Table(
-    new Row(new Data(1), new Data(2), new Data(3))
+    [1, 2, 3]
   ))
 })
 
@@ -25,13 +25,13 @@ test('nested generate', t => {
 
   const table = generateTable(data, props)
   t.deepEqual(table, new Table(
-    new Row(
-      new Data(1),
-      new Table(
-        new Row(new Data(2), new Data(3))
-      ),
-      new Data(4) 
-    )
+    [
+      1,
+      [
+        [2, 3]
+      ],
+      4
+    ]
   ))
 })
 
@@ -44,8 +44,8 @@ test('array generate', t => {
 
   const table = generateTable(data, props)
   t.deepEqual(table, new Table(
-    new Row(new Data(1), new Data(2), new Data(3)),
-    new Row(new Data(4), new Data(5), new Data(6))
+    [1, 2, 3],
+    [4, 5, 6]
   ))
 })
 
@@ -69,13 +69,13 @@ test('nested array generate', t => {
 
   const table = generateTable(data, props)
   t.deepEqual(table, new Table(
-    new Row(
-      new Data(1),
-      new Table( 
-        new Row(new Data(2), new Data(3)),
-        new Row(new Data(4), new Data(5)),
-      ),
-      new Data(6)
-    )
+    [
+      1,
+      [
+        [2, 3],
+        [4, 5]
+      ],
+      6
+    ]
   ))
 })
