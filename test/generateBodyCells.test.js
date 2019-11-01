@@ -1,4 +1,3 @@
-// TODO: 如果语法错误没有具体的报错
 const test = require('ava')
 const generateCells = require('../lib/generateBodyCells')
 const { AddressableCells } = require('../lib/table_defs')
@@ -112,8 +111,8 @@ test('two nested array generate', t => {
     { r: 1, c: 1, rs: 3, v: 1 },
     { r: 1, c: 2, v: 2 },
     { r: 1, c: 3, v: 3 },
-    { r: 2, c: 2, rs: 2, v: 4 },
-    { r: 2, c: 3, rs: 2, v: 5 },
+    { r: 2, c: 2, v: 4 },
+    { r: 2, c: 3, v: 5 },
     { r: 1, c: 4, v: 6 },
     { r: 1, c: 5, v: 7 },
     { r: 1, c: 6, v: 8 },
@@ -123,5 +122,52 @@ test('two nested array generate', t => {
     { r: 3, c: 4, v: 12 },
     { r: 3, c: 5, v: 13 },
     { r: 3, c: 6, v: 14 }
+  ))
+})
+
+test('more depth nested array generate', t => {
+  const props = [
+    { key: 'a' },
+    { 
+      key: 'b', 
+      props: [
+        { 
+          key: 'c',
+          props: [ { key: 'd' }, { key: 'e' } ]
+        },
+        { key: 'f' }
+      ]
+    }
+  ]
+  const data = {
+    a: 1,
+    b: [
+      {
+        c: [
+          { d: 2, e: 3 },
+          { d: 4, e: 5 }
+        ],
+        f: 6
+      },
+      {
+        c: {
+          d: 7, e: 8
+        },
+        f: 9
+      }
+    ]
+  }
+
+  const cells = generateCells(data, props)
+  t.deepEqual(cells, AddressableCells(    
+    { r: 1, c: 1, rs: 3, v: 1 },
+    { r: 1, c: 2, v: 2 },
+    { r: 1, c: 3, v: 3 },
+    { r: 2, c: 2, v: 4 },
+    { r: 2, c: 3, v: 5 },
+    { r: 1, c: 4, rs: 2, v: 6 },
+    { r: 3, c: 2, v: 7 },
+    { r: 3, c: 3, v: 8 },
+    { r: 3, c: 4, v: 9 }
   ))
 })

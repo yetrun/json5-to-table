@@ -121,3 +121,48 @@ test('two nested array generate', t => {
     ]
   ))
 })
+
+test('more depth nested array generate', t => {
+  const props = [
+    { key: 'a' },
+    { 
+      key: 'b', 
+      props: [
+        { 
+          key: 'c',
+          props: [ { key: 'd' }, { key: 'e' } ]
+        },
+        { key: 'f' }
+      ]
+    }
+  ]
+  const data = {
+    a: 1,
+    b: [
+      {
+        c: [
+          { d: 2, e: 3 },
+          { d: 4, e: 5 }
+        ],
+        f: 6
+      }
+    ]
+  }
+
+  debugger
+  const table = generateTable(data, props)
+  t.deepEqual(table, new Table(
+    [
+      1,
+      [
+        [
+          [
+            [ 2, 3 ],
+            [ 4, 5 ]
+          ],
+          6
+        ]
+      ]
+    ]
+  ))
+})
