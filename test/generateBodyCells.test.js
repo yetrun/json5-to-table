@@ -2,7 +2,7 @@ const test = require('ava')
 const generateCells = require('../lib/generateBodyCells')
 const { AddressableCells } = require('../lib/table_defs')
 
-test('simple generate', t => {
+test('object', t => {
   const props = [ { key: 'a' }, { key: 'b' }, { key: 'c' } ]
   const data = { a: 1, b: 2, c: 3 }
 
@@ -14,7 +14,7 @@ test('simple generate', t => {
   ))
 })
 
-test('nested generate', t => {
+test('object -> object', t => {
   const props = [
     { key: 'a' },
     { 
@@ -34,7 +34,7 @@ test('nested generate', t => {
   ))
 })
 
-test('array generate', t => {
+test('array', t => {
   const props = [ { key: 'a' }, { key: 'b' }, { key: 'c' } ]
   const data = [
     { a: 1, b: 2, c: 3 },
@@ -52,7 +52,7 @@ test('array generate', t => {
   ))
 })
 
-test('nested array generate', t => {
+test('object -> array', t => {
   const props = [
     { key: 'a' },
     { 
@@ -81,7 +81,52 @@ test('nested array generate', t => {
   ))
 })
 
-test('two nested array generate', t => {
+test('more(object -> array)', t => {
+  const props = [
+    { key: 'a' },
+    { 
+      key: 'b', 
+      props: [ { key: 'c' }, { key: 'd' } ]
+    },
+    { key: 'e' }
+  ]
+  const data = [
+    {
+      a: 1,
+      b: [
+        { c: 2, d: 3 },
+        { c: 4, d: 5 }
+      ],
+      e: 6
+    },
+    {
+      a: 11,
+      b: [
+        { c: 12, d: 13 },
+        { c: 14, d: 15 }
+      ],
+      e: 16
+    }
+  ]
+
+  const cells = generateCells(data, props)
+  t.deepEqual(cells, AddressableCells(    
+    { r: 1, c: 1, rs: 2, v: 1 },
+    { r: 1, c: 2, v: 2 },
+    { r: 1, c: 3, v: 3 },
+    { r: 1, c: 4, rs: 2, v: 6 },
+    { r: 2, c: 2, v: 4 },
+    { r: 2, c: 3, v: 5 },
+    { r: 3, c: 1, rs: 2, v: 11 },
+    { r: 3, c: 2, v: 12 },
+    { r: 3, c: 3, v: 13 },
+    { r: 3, c: 4, rs: 2, v: 16 },
+    { r: 4, c: 2, v: 14 },
+    { r: 4, c: 3, v: 15 }
+  ))
+})
+
+test('object -> array,array', t => {
   const props = [
     { key: 'a' },
     { 
@@ -125,7 +170,7 @@ test('two nested array generate', t => {
   ))
 })
 
-test('more depth nested array generate', t => {
+test('object with two levels object array', t => {
   const props = [
     { key: 'a' },
     { 

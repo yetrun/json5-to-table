@@ -2,7 +2,7 @@ const test = require('ava')
 const generateCells = require('../lib/generateHeadCells')
 const { AddressableCells } = require('../lib/table_defs')
 
-test('simple generate', t => {
+test('props', t => {
   const props = [ { key: 'a' }, { key: 'b' }, { key: 'c' } ]
 
   const cells = generateCells(props)
@@ -13,7 +13,7 @@ test('simple generate', t => {
   ))
 })
 
-test('nested generate', t => {
+test('props -> props', t => {
   const props = [
     { key: 'a' },
     { 
@@ -33,7 +33,7 @@ test('nested generate', t => {
   ))
 })
 
-test('two nested generate', t => {
+test('props -> props,(props -> props)', t => {
   const props = [
     { key: 'a' },
     { 

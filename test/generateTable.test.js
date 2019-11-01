@@ -2,7 +2,7 @@ const test = require('ava')
 const generateTable = require('../lib/generateTable')
 const { Table, Row, Data } = require('../lib/table_defs')
 
-test('simple generate', t => {
+test('object', t => {
   const props = [ { key: 'a' }, { key: 'b' }, { key: 'c' } ]
   const data = { a: 1, b: 2, c: 3 }
 
@@ -12,7 +12,7 @@ test('simple generate', t => {
   ))
 })
 
-test('nested generate', t => {
+test('object -> object', t => {
   const props = [
     { key: 'a' },
     { 
@@ -35,7 +35,7 @@ test('nested generate', t => {
   ))
 })
 
-test('array generate', t => {
+test('array', t => {
   const props = [ { key: 'a' }, { key: 'b' }, { key: 'c' } ]
   const data = [
     { a: 1, b: 2, c: 3 },
@@ -49,7 +49,7 @@ test('array generate', t => {
   ))
 })
 
-test('nested array generate', t => {
+test('object->array', t => {
   const props = [
     { key: 'a' },
     { 
@@ -80,7 +80,7 @@ test('nested array generate', t => {
   ))
 })
 
-test('two nested array generate', t => {
+test('object -> array,array', t => {
   const props = [
     { key: 'a' },
     { 
@@ -149,7 +149,6 @@ test('more depth nested array generate', t => {
     ]
   }
 
-  debugger
   const table = generateTable(data, props)
   t.deepEqual(table, new Table(
     [
