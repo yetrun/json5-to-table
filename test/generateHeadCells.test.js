@@ -32,3 +32,36 @@ test('nested generate', t => {
     { r: 2, c: 3, v: 'd' }
   ))
 })
+
+test('two nested generate', t => {
+  const props = [
+    { key: 'a' },
+    { 
+      key: 'b', 
+      props: [ { key: 'c' }, { key: 'd' } ]
+    },
+    { 
+      key: 'e',
+      props: [ 
+        { 
+          key: 'f',
+          props: [ { key: 'g' }, { key: 'h' }]
+        }, 
+        { key: 'i' } 
+      ]
+    }
+  ]
+
+  const cells = generateCells(props)
+  t.deepEqual(cells, AddressableCells(
+    { r: 1, c: 1, rs: 3, v: 'a' },
+    { r: 1, c: 2, cs: 2, v: 'b' },
+    { r: 2, c: 2, rs: 2, v: 'c' },
+    { r: 2, c: 3, rs: 2, v: 'd' },
+    { r: 1, c: 4, cs: 3, v: 'e' },
+    { r: 2, c: 4, cs: 2, v: 'f' },
+    { r: 3, c: 4, v: 'g' },
+    { r: 3, c: 5, v: 'h' },
+    { r: 2, c: 6, rs: 2, v: 'i' }
+  ))
+})
