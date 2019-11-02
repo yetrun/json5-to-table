@@ -1,7 +1,7 @@
 const test = require('ava')
 const jsonToHTMLTable = require('../lib/jsonToHTMLTable')
 
-test('object', t => {
+test('simple generate', t => {
   const props = [ { key: 'a' }, { key: 'b' }, { key: 'c' } ]
   const data = [{ a: 1, b: 2, c: 3 }]
 
