@@ -81,6 +81,18 @@ test('object -> array', t => {
   ))
 })
 
+test('object -> array(scalar)', t => {
+  const props = [ { key: 'a' }, { key: 'b' }, { key: 'c' } ]
+  const data = { a: 1, b: [2, 3, 4], c: 5 }
+
+  const cells = generateCells(data, props)
+  t.deepEqual(cells, AddressableCells( 
+    { r: 1, c: 1, v: 1 },
+    { r: 1, c: 2, v: [2, 3, 4] },
+    { r: 1, c: 3, v: 5 }
+  ))
+})
+
 test('more(object -> array)', t => {
   const props = [
     { key: 'a' },
