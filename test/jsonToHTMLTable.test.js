@@ -3,7 +3,10 @@ const jsonToHTMLTable = require('../lib/jsonToHTMLTable')
 
 test('simple generate', t => {
   const props = [ { key: 'a' }, { key: 'b' }, { key: 'c' } ]
-  const data = [{ a: 1, b: 2, c: 3 }]
+  const data = [
+    { a: 1, b: 2, c: 3 },
+    { a: 4, b: 5, c: 6 }
+  ]
 
   const htmlTable = jsonToHTMLTable(data, props)
   t.is(htmlTable, 
@@ -31,6 +34,17 @@ test('simple generate', t => {
       </td>
       <td>
         3
+      </td>
+    </tr>
+    <tr>
+      <td>
+        4
+      </td>
+      <td>
+        5
+      </td>
+      <td>
+        6
       </td>
     </tr>
   </tbody>
