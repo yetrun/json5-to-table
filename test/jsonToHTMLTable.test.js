@@ -10,7 +10,7 @@ test('simple generate', t => {
   ]
 
   const htmlTable = jsonToHTMLTable(data, props)
-  t.is(htmlTable, fs.readFileSync('test/fixtures/simple-generate.html', 'UTF-8').trim())
+  t.is(htmlTable, fs.readFileSync('test/fixtures/simple.html', 'UTF-8').trim())
 })
 
 test('complex generate', t => {
@@ -42,10 +42,10 @@ test('complex generate', t => {
   ]
 
   const htmlTable = jsonToHTMLTable(data, props)
-  t.is(htmlTable, fs.readFileSync('test/fixtures/complex-generate.html', 'UTF-8').trim())
+  t.is(htmlTable, fs.readFileSync('test/fixtures/complex.html', 'UTF-8').trim())
 })
 
-test.skip('more complex generate', t => {
+test('with blank space', t => {
   const props = [
     { key: 'a' },
     { 
@@ -73,5 +73,5 @@ test.skip('more complex generate', t => {
   ]
 
   const htmlTable = jsonToHTMLTable(data, props)
-  t.is(htmlTable, fs.readFileSync('test/fixtures/complex-generate.html', 'UTF-8').trim())
+  t.is(htmlTable, fs.readFileSync('test/fixtures/with-blank-space.html', 'UTF-8').trim())
 })
