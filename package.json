@@ -10,5 +10,8 @@
   },
   "devDependencies": {
     "ava": "^2.4.0"
+  },
+  "dependencies": {
+    "xlsx": "^0.15.1"
   }
 }

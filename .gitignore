@@ -1,2 +1,6 @@
 /node_modules
 /mock
+
+# TODO: 为什么 temp/* 不起作用
+/test/temp/*
+!/test/temp/.keep

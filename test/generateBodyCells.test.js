@@ -229,3 +229,15 @@ test('object with two levels object array', t => {
     { r: 3, c: 4, v: 9 }
   ))
 })
+
+test('specify start position', t => {
+  const props = [ { key: 'a' }, { key: 'b' }, { key: 'c' } ]
+  const data = { a: 1, b: 2, c: 3 }
+
+  const cells = generateCells(data, props, 2)
+  t.deepEqual(cells, new AddressableCells( 
+    { r: 2, c: 1, v: 1 },
+    { r: 2, c: 2, v: 2 },
+    { r: 2, c: 3, v: 3 }
+  ))
+})
