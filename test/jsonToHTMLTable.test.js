@@ -1,4 +1,5 @@
 const test = require('ava')
+const fs = require('fs')
 const jsonToHTMLTable = require('../lib/jsonToHTMLTable')
 
 test('simple generate', t => {
@@ -9,44 +10,68 @@ test('simple generate', t => {
   ]
 
   const htmlTable = jsonToHTMLTable(data, props)
-  t.is(htmlTable, 
-`<table>
-  <thead>
-    <tr>
-      <th>
-        a
-      </th>
-      <th>
-        b
-      </th>
-      <th>
-        c
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        1
-      </td>
-      <td>
-        2
-      </td>
-      <td>
-        3
-      </td>
-    </tr>
-    <tr>
-      <td>
-        4
-      </td>
-      <td>
-        5
-      </td>
-      <td>
-        6
-      </td>
-    </tr>
-  </tbody>
-</table>`)
+  t.is(htmlTable, fs.readFileSync('test/fixtures/simple-generate.html', 'UTF-8').trim())
+})
+
+test('complex generate', t => {
+  const props = [
+    { key: 'a' },
+    { 
+      key: 'b', 
+      props: [ { key: 'c' }, { key: 'd' } ]
+    },
+    { key: 'e' }
+  ]
+  const data = [
+    {
+      a: 1,
+      b: [
+        { c: 2, d: 3 },
+        { c: 4, d: 5 }
+      ],
+      e: 6
+    },
+    {
+      a: 11,
+      b: [
+        { c: 12, d: 13 },
+        { c: 14, d: 15 }
+      ],
+      e: 16
+    }
+  ]
+
+  const htmlTable = jsonToHTMLTable(data, props)
+  t.is(htmlTable, fs.readFileSync('test/fixtures/complex-generate.html', 'UTF-8').trim())
+})
+
+test.skip('more complex generate', t => {
+  const props = [
+    { key: 'a' },
+    { 
+      key: 'b', 
+      props: [ { key: 'd' }, { key: 'e' } ]
+    },
+    { 
+      key: 'c', 
+      props: [ { key: 'd' }, { key: 'e' }, { key: 'f' } ]
+    }
+  ]
+  const data = [
+    {
+      a: 1,
+      b: [
+        { d: 2, e: 3 },
+        { d: 4, e: 5 }
+      ],
+      c: [
+        { d: 6, e: 7, f: 8 },
+        { d: 9, e: 10, f: 11 },
+        { d: 12, e: 13, f: 14 }
+      ]
+    }
+  ]
+
+  const htmlTable = jsonToHTMLTable(data, props)
+  t.is(htmlTable, fs.readFileSync('test/fixtures/complex-generate.html', 'UTF-8').trim())
 })
