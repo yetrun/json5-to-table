@@ -7,7 +7,7 @@ test('object', t => {
   const data = { a: 1, b: 2, c: 3 }
 
   const cells = generateCells(data, props)
-  t.deepEqual(cells, AddressableCells( 
+  t.deepEqual(cells, new AddressableCells( 
     { r: 1, c: 1, v: 1 },
     { r: 1, c: 2, v: 2 },
     { r: 1, c: 3, v: 3 }
@@ -26,7 +26,7 @@ test('object -> object', t => {
   const data = { a: 1, b: { c: 2, d: 3 }, e: 4 }
 
   const cells = generateCells(data, props)
-  t.deepEqual(cells, AddressableCells(
+  t.deepEqual(cells, new AddressableCells(
     { r: 1, c: 1, v: 1 },
     { r: 1, c: 2, v: 2 },
     { r: 1, c: 3, v: 3 },
@@ -42,7 +42,7 @@ test('array', t => {
   ]
 
   const cells = generateCells(data, props)
-  t.deepEqual(cells, AddressableCells(
+  t.deepEqual(cells, new AddressableCells(
     { r: 1, c: 1, v: 1 },
     { r: 1, c: 2, v: 2 },
     { r: 1, c: 3, v: 3 },
@@ -71,7 +71,7 @@ test('object -> array', t => {
   }
 
   const cells = generateCells(data, props)
-  t.deepEqual(cells, AddressableCells(    
+  t.deepEqual(cells, new AddressableCells(    
     { r: 1, c: 1, rs: 2, v: 1 },
     { r: 1, c: 2, v: 2 },
     { r: 1, c: 3, v: 3 },
@@ -86,7 +86,7 @@ test('object -> array(scalar)', t => {
   const data = { a: 1, b: [2, 3, 4], c: 5 }
 
   const cells = generateCells(data, props)
-  t.deepEqual(cells, AddressableCells( 
+  t.deepEqual(cells, new AddressableCells( 
     { r: 1, c: 1, v: 1 },
     { r: 1, c: 2, v: [2, 3, 4] },
     { r: 1, c: 3, v: 5 }
@@ -122,7 +122,7 @@ test('more(object -> array)', t => {
   ]
 
   const cells = generateCells(data, props)
-  t.deepEqual(cells, AddressableCells(    
+  t.deepEqual(cells, new AddressableCells(    
     { r: 1, c: 1, rs: 2, v: 1 },
     { r: 1, c: 2, v: 2 },
     { r: 1, c: 3, v: 3 },
@@ -164,7 +164,7 @@ test('object -> array,array', t => {
   }
 
   const cells = generateCells(data, props)
-  t.deepEqual(cells, AddressableCells(    
+  t.deepEqual(cells, new AddressableCells(    
     { r: 1, c: 1, rs: 3, v: 1 },
     { r: 1, c: 2, v: 2 },
     { r: 1, c: 3, v: 3 },
@@ -216,7 +216,7 @@ test('object with two levels object array', t => {
   }
 
   const cells = generateCells(data, props)
-  t.deepEqual(cells, AddressableCells(    
+  t.deepEqual(cells, new AddressableCells(    
     { r: 1, c: 1, rs: 3, v: 1 },
     { r: 1, c: 2, v: 2 },
     { r: 1, c: 3, v: 3 },

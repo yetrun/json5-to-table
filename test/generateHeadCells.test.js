@@ -6,7 +6,7 @@ test('props', t => {
   const props = [ { key: 'a' }, { key: 'b' }, { key: 'c' } ]
 
   const cells = generateCells(props)
-  t.deepEqual(cells, AddressableCells(    
+  t.deepEqual(cells, new AddressableCells(    
     { r: 1, c: 1, v: 'a' },
     { r: 1, c: 2, v: 'b' },
     { r: 1, c: 3, v: 'c' }
@@ -24,7 +24,7 @@ test('props -> props', t => {
   ]
 
   const cells = generateCells(props)
-  t.deepEqual(cells, AddressableCells(
+  t.deepEqual(cells, new AddressableCells(
     { r: 1, c: 1, rs: 2, v: 'a' },
     { r: 1, c: 2, cs: 2, v: 'b' },
     { r: 1, c: 4, rs: 2, v: 'e' },
@@ -53,7 +53,7 @@ test('props -> props,(props -> props)', t => {
   ]
 
   const cells = generateCells(props)
-  t.deepEqual(cells, AddressableCells(
+  t.deepEqual(cells, new AddressableCells(
     { r: 1, c: 1, rs: 3, v: 'a' },
     { r: 1, c: 2, cs: 2, v: 'b' },
     { r: 2, c: 2, rs: 2, v: 'c' },
