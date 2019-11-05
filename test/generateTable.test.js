@@ -1,4 +1,4 @@
-const test = require('ava')
+const test = require('./test')
 const generateTable = require('../lib/generateTable')
 const { Table, Row, Data } = require('../lib/table_defs')
 

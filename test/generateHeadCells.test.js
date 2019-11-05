@@ -1,4 +1,4 @@
-const test = require('ava')
+const test = require('./test')
 const generateCells = require('../lib/generateHeadCells')
 const { AddressableCells } = require('../lib/table_defs')
 

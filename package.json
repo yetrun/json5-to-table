@@ -8,6 +8,11 @@
   "scripts": {
     "test": "ava"
   },
+  "ava": {
+    "files": [
+      "test/**/*.test.js"
+    ]
+  },
   "devDependencies": {
     "ava": "^2.4.0"
   },

@@ -1,4 +1,4 @@
-const test = require('ava')
+const test = require('./test')
 const Render1 = require('../lib/Render1')
 
 test('simple render', t => {

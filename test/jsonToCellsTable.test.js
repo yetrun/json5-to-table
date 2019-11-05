@@ -1,4 +1,4 @@
-const test = require('ava')
+const test = require('./test')
 const jsonToCellsTable = require('../lib/jsonToCellsTable')
 
 test('simple generate', t => {

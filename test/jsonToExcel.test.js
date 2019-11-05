@@ -1,4 +1,4 @@
-const test = require('ava')
+const test = require('./test')
 const jsonToExcel = require('../lib/jsonToExcel')
 
 test('simple generate', t => {

@@ -1,4 +1,4 @@
-const test = require('ava')
+const test = require('./test')
 const fs = require('fs')
 const jsonToHTMLTable = require('../lib/jsonToHTMLTable')
 
