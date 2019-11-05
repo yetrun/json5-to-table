@@ -75,4 +75,13 @@ test('with blank space', t => {
   t.pass()
 })
 
-// TODO: scalar array
+test('with array and object val', t => {
+  const props = [ { key: 'a' }, { key: 'b' }, { key: 'c' } ]
+  const data = [
+    { a: 1, b: [2.1, 2.2, 2.3], c: 3 },
+    { a: 4, b: { k1: 5.1, k2: 5.2 }, c: 6 }
+  ]
+
+  jsonToExcel(data, props, 'test/temp/4.xlsx')
+  t.pass()
+})

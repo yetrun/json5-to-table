@@ -75,3 +75,14 @@ test('with blank space', t => {
   const htmlTable = jsonToHTMLTable(data, props)
   t.is(htmlTable, fs.readFileSync('test/fixtures/with-blank-space.html', 'UTF-8').trim())
 })
+
+test('with array and object value', t => {
+  const props = [ { key: 'a' }, { key: 'b' }, { key: 'c' } ]
+  const data = [
+    { a: 1, b: [2.1, 2.2, 2.3], c: 3 },
+    { a: 4, b: { k1: 5.1, k2: 5.2 }, c: 6 }
+  ]
+
+  const htmlTable = jsonToHTMLTable(data, props)
+  t.is(htmlTable, fs.readFileSync('test/fixtures/with-array-and-object-value.html', 'UTF-8').trim())
+})
