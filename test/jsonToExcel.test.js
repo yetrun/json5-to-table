@@ -1,17 +1,13 @@
 const test = require('./test')
 const XLSX = require('xlsx')
 const fs = require('fs')
-const path = require('path')
 const jsonToExcel = require('../lib/jsonToExcel')
 
-function generateSameXLSX (t, sourcePath, ws) {
+function generateSameXLSX (t, sourceBuffers, ws) {
   const wb = XLSX.utils.book_new()
   XLSX.utils.book_append_sheet(wb, ws, 'Sheet1')
-
-  const filename = path.basename(sourcePath).replace(path.extname(sourcePath), '')
-  const targetPath = path.dirname(sourcePath) + '/' + filename + '.dump' + path.extname(sourcePath)
-  XLSX.writeFile(wb, targetPath)
-  t.deepEqual(fs.readFileSync(sourcePath), fs.readFileSync(targetPath))
+  const targetBuffers = XLSX.write(wb, { type: 'buffer' })
+  t.deepEqual(sourceBuffers, targetBuffers)
 }
 
 test('simple generate', t => {
@@ -21,8 +17,8 @@ test('simple generate', t => {
     { a: 4, b: 5, c: 6 }
   ]
 
-  jsonToExcel(data, props, 'test/temp/1.xlsx')
-  generateSameXLSX(t, 'test/temp/1.xlsx', {
+  const buffers = jsonToExcel(data, props)
+  generateSameXLSX(t, buffers, {
     A1: { v: 'a', t: 's' },
     B1: { v: 'b', t: 's' },
     C1: { v: 'c', t: 's' },
@@ -65,8 +61,8 @@ test('complex generate', t => {
     }
   ]
 
-  jsonToExcel(data, props, 'test/temp/2.xlsx')
-  generateSameXLSX(t, 'test/temp/2.xlsx', {
+  const buffers = jsonToExcel(data, props)
+  generateSameXLSX(t, buffers, {
     A1: { v: 'a', t: 's' },
     B1: { v: 'b', t: 's' },
     D1: { v: 'e', t: 's' },
@@ -124,8 +120,8 @@ test('with blank space', t => {
     }
   ]
 
-  jsonToExcel(data, props, 'test/temp/3.xlsx')
-  generateSameXLSX(t, 'test/temp/3.xlsx', { 
+  const buffers = jsonToExcel(data, props)
+  generateSameXLSX(t, buffers, { 
     A1: { v: 'a', t: 's' },
     B1: { v: 'b', t: 's' },
     D1: { v: 'c', t: 's' },
@@ -166,8 +162,8 @@ test('with array and object value', t => {
     { a: 4, b: { k1: 5.1, k2: 5.2 }, c: 6 }
   ]
 
-  jsonToExcel(data, props, 'test/temp/4.xlsx')
-  generateSameXLSX(t, 'test/temp/4.xlsx',{
+  const buffers = jsonToExcel(data, props)
+  generateSameXLSX(t, buffers, {
     A1: { v: 'a', t: 's' },
     B1: { v: 'b', t: 's' },
     C1: { v: 'c', t: 's' },
@@ -179,5 +175,28 @@ test('with array and object value', t => {
     C3: { v: 6, t: 'n' },
     '!merges': [],
     '!ref': 'A1:C3',
+  })
+})
+
+test('write to file', t => {
+  const props = [ { key: 'a' }, { key: 'b' }, { key: 'c' } ]
+  const data = [
+    { a: 1, b: 2, c: 3 },
+    { a: 4, b: 5, c: 6 }
+  ]
+
+  jsonToExcel(data, props, 'test/temp/1.xlsx')
+  generateSameXLSX(t, fs.readFileSync('test/temp/1.xlsx'), {
+    A1: { v: 'a', t: 's' },
+    B1: { v: 'b', t: 's' },
+    C1: { v: 'c', t: 's' },
+    A2: { v: 1, t: 'n' },
+    B2: { v: 2, t: 'n' },
+    C2: { v: 3, t: 'n' },
+    A3: { v: 4, t: 'n' },
+    B3: { v: 5, t: 'n' },
+    C3: { v: 6, t: 'n' },
+    '!merges': [],
+    '!ref': 'A1:C3'
   })
 })
