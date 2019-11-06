@@ -1,4 +1,5 @@
 const test = require('./test')
+const { Writable } = require('stream');
 const fs = require('fs')
 const jsonToHTMLTable = require('../lib/jsonToHTMLTable')
 
@@ -10,10 +11,10 @@ test('simple generate', t => {
   ]
 
   const htmlTable = jsonToHTMLTable(data, props)
-  t.is(htmlTable, fs.readFileSync('test/fixtures/simple.html', 'UTF-8').trim())
+  t.is(htmlTable, fs.readFileSync('test/fixtures/simple.html', 'UTF-8'))
 })
 
-test('complex generate', t => {
+test.cb('complex generate', t => {
   const props = [
     { key: 'a' },
     { 
@@ -41,8 +42,24 @@ test('complex generate', t => {
     }
   ]
 
-  const htmlTable = jsonToHTMLTable(data, props)
-  t.is(htmlTable, fs.readFileSync('test/fixtures/complex.html', 'UTF-8').trim())
+  // 构建自定义的 write stream
+  let buffer = ''
+  const stream = new Writable({
+    write(chunk, encoding, done) {
+      buffer += chunk.toString()
+      done()
+    }
+  })
+
+  const htmlTable = jsonToHTMLTable(data, props, { writeTo: stream })
+  stream.end()
+  stream.on('finish', () => {
+    t.is(
+      buffer,
+      fs.readFileSync('test/fixtures/complex.html', 'UTF-8')
+    )
+    t.end()
+  })
 })
 
 test('with blank space', t => {
@@ -73,7 +90,7 @@ test('with blank space', t => {
   ]
 
   const htmlTable = jsonToHTMLTable(data, props)
-  t.is(htmlTable, fs.readFileSync('test/fixtures/with-blank-space.html', 'UTF-8').trim())
+  t.is(htmlTable, fs.readFileSync('test/fixtures/with-blank-space.html', 'UTF-8'))
 })
 
 test('with array and object value', t => {
@@ -84,5 +101,5 @@ test('with array and object value', t => {
   ]
 
   const htmlTable = jsonToHTMLTable(data, props)
-  t.is(htmlTable, fs.readFileSync('test/fixtures/with-array-and-object-value.html', 'UTF-8').trim())
+  t.is(htmlTable, fs.readFileSync('test/fixtures/with-array-and-object-value.html', 'UTF-8'))
 })
