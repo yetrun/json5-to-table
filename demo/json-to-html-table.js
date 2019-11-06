@@ -39,8 +39,7 @@ function table2 () {
     }
   ]
 
-  const table = jsonToHTMLTable(data, props)
-  document.getElementById('table2').appendChild(table)
+  jsonToHTMLTable(data, props, document.getElementById('table2'))
 }
 
 function table3 () {
