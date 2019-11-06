@@ -39,7 +39,7 @@ function table2 () {
     }
   ]
 
-  jsonToHTMLTable(data, props, document.getElementById('table2'))
+  jsonToHTMLTable(data, props, { replaceWith: document.getElementById('table2') })
 }
 
 function table3 () {
@@ -69,8 +69,8 @@ function table3 () {
     }
   ]
 
-  const table = jsonToHTMLTable(data, props)
-  document.getElementById('table3').appendChild(table)
+  const table = jsonToHTMLTable(data, props, { targetFormat: 'sourceCode' })
+  document.getElementById('table3').innerHTML = table
 }
 
 function table4 () {
@@ -80,8 +80,7 @@ function table4 () {
     { a: 4, b: { k1: 5.1, k2: 5.2 }, c: 6 }
   ]
 
-  const table = jsonToHTMLTable(data, props)
-  document.getElementById('table4').appendChild(table)
+  jsonToHTMLTable(data, props, { replaceWith: '#table4' })
 }
 
 table1()
