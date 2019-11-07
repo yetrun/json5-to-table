@@ -1,4 +1,4 @@
-const jsonToHTMLTable = require('../lib/jsonToHTMLTable')
+const { jsonToHTMLTable } = JSONToTable
 
 function table1 () {
   const props = [ { key: 'a' }, { key: 'b' }, { key: 'c' } ]

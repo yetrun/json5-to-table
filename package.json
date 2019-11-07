@@ -2,7 +2,7 @@
   "name": "json-to-table",
   "version": "1.0.0-developing",
   "description": "JSON 转化为表格的工具",
-  "main": "index.js",
+  "main": "lib/index.js",
   "author": "run27017 <run27017@126.com>",
   "license": "LGPL-2.1",
   "scripts": {
