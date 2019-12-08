@@ -1,5 +1,5 @@
 const test = require('./test')
-const generateTable = require('../lib/generateTable')
+const generateTable = require('../lib/generateTableObject')
 const { Table, Row, Data } = require('../lib/table_defs')
 
 test('object', t => {
@@ -163,5 +163,19 @@ test('more depth nested array generate', t => {
         ]
       ]
     ]
+  ))
+})
+
+test('simple generate with title', t => {
+  const props = [ 
+    { key: 'a', title: 'A' },
+    { key: 'b', title: 'B' },
+    { key: 'c', title: 'C' } 
+  ]
+  const data = { a: 1, b: 2, c: 3 }
+
+  const table = generateTable(data, props)
+  t.deepEqual(table, new Table(
+    [1, 2, 3]
   ))
 })
