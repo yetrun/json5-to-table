@@ -103,3 +103,18 @@ test('with array and object value', t => {
   const htmlTable = jsonToHTMLTable(data, props)
   t.is(htmlTable, fs.readFileSync('test/fixtures/with-array-and-object-value.html', 'UTF-8'))
 })
+
+test('generate with title', t => {
+  const props = [ 
+    { key: 'a', title: 'A' },
+    { key: 'b', title: 'B' },
+    { key: 'c', title: 'C' } 
+  ]
+  const data = [
+    { a: 1, b: 2, c: 3 },
+    { a: 4, b: 5, c: 6 }
+  ]
+
+  const htmlTable = jsonToHTMLTable(data, props)
+  t.is(htmlTable, fs.readFileSync('test/fixtures/simple_with_title.html', 'UTF-8'))
+})
