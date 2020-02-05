@@ -208,7 +208,7 @@ function jsonToCustomize (data, props) {
 
 ### 做都没做
 
-- [ ] title
+- [x] title
 - [ ] 简写
 - [ ] 顺序
 
