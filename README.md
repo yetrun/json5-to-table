@@ -209,7 +209,7 @@ function jsonToCustomize (data, props) {
 ### 做都没做
 
 - [x] title
-- [ ] 简写
+- [x] 简写
 - [ ] 顺序
 
 ### Unresolved Tips

@@ -118,3 +118,14 @@ test('generate with title', t => {
   const htmlTable = jsonToHTMLTable(data, props)
   t.is(htmlTable, fs.readFileSync('test/fixtures/simple_with_title.html', 'UTF-8'))
 })
+
+test('generate with string defs', t => {
+  const props = ['a', 'b', 'c']
+  const data = [
+    { a: 1, b: 2, c: 3 },
+    { a: 4, b: 5, c: 6 }
+  ]
+
+  const htmlTable = jsonToHTMLTable(data, props)
+  t.is(htmlTable, fs.readFileSync('test/fixtures/simple.html', 'UTF-8'))
+})

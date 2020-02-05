@@ -80,3 +80,14 @@ test('props with title', t => {
     { r: 1, c: 3, v: 'C' }
   ))
 })
+
+test('simplified props', t => {
+  const props = [ 'a', 'b', 'c' ]
+
+  const cells = generateCells(props)
+  t.deepEqual(cells, new AddressableCells(    
+    { r: 1, c: 1, v: 'a' },
+    { r: 1, c: 2, v: 'b' },
+    { r: 1, c: 3, v: 'c' }
+  ))
+})
