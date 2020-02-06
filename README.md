@@ -181,22 +181,28 @@ jsonToExcel(data, [props], [toPath])
 v1 的方式称之为 Context. 库提供一个 Context，扩展者使用 Context 实现自己的自由扩展。Context 提供生成 cells 的方法。虽然说样板代码更多了，但理解起来更为简单。
 
 ```javascript
-function jsonToCustomize (data, props) {
-  const { Context } = require('json-to-table')
+const { Context } = require('json-to-table')
 
+function jsonToCustomize (data, props) {
   const context = new Context()
 
-  const propCells = context.parseProps(props) // 生成 props
-  // 用你自己的方式处理  propCells
+  if (props) {
+    context.initProps(props)
+  } else {
+    context.initPropsFromData(array.slice(0, 10))
+  }
+
+  const headCells = context.generateHeadCells(props)
+  // 用你自己的方式处理 headCells
 
   for (const item of data) {
-    const dataCells = context.parseNextData(item)
+    const dataCells = context.generateDataCells(item)
     // 用你自己的方式处理这一条数据 dataCells
   }
 }
 ```
 
-`Cells`: 一个数组对象，每个元素代表表格中的每个单元格。其字段列举如下：
+`Cells`: 一个数组，其中每个元素代表表格中的单元格。字段列举如下：
 
 - `r`: 单元格所在的行序号
 - `c`: 单元格所在的行序号
