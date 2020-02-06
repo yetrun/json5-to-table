@@ -1,6 +1,13 @@
 const test = require('../test')
-const generateCells = require('../../lib/jsonToTable/generateHeadCells')
+const normalizeProps = require('../../lib/jsonToTable/normalizeProps')
+const generateHeadCells = require('../../lib/jsonToTable/generateHeadCells')
 const { AddressableCells } = require('../../lib/jsonToTable/table_defs')
+
+function generateCells (props) {
+  return generateHeadCells(
+    normalizeProps(props)
+  )
+}
 
 test('props', t => {
   const props = [ { key: 'a' }, { key: 'b' }, { key: 'c' } ]
@@ -78,16 +85,5 @@ test('props with title', t => {
     { r: 1, c: 1, v: 'A' },
     { r: 1, c: 2, v: 'B' },
     { r: 1, c: 3, v: 'C' }
-  ))
-})
-
-test('simplified props', t => {
-  const props = [ 'a', 'b', 'c' ]
-
-  const cells = generateCells(props)
-  t.deepEqual(cells, new AddressableCells(    
-    { r: 1, c: 1, v: 'a' },
-    { r: 1, c: 2, v: 'b' },
-    { r: 1, c: 3, v: 'c' }
   ))
 })
