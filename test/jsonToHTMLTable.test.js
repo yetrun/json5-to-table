@@ -1,8 +1,9 @@
 const test = require('./test')
-const { Writable } = require('stream');
+const { Writable } = require('stream')
 const fs = require('fs')
 const jsonToHTMLTable = require('../lib/jsonToHTMLTable')
 
+// 生成简单的 HTML 表格
 test('simple generate', t => {
   const props = [ { key: 'a' }, { key: 'b' }, { key: 'c' } ]
   const data = [
@@ -14,6 +15,7 @@ test('simple generate', t => {
   t.is(htmlTable, fs.readFileSync('test/fixtures/simple.html', 'UTF-8'))
 })
 
+// 生成带有嵌套属性的 HTML 表格，同时测试 stream
 test.cb('complex generate', t => {
   const props = [
     { key: 'a' },
@@ -62,7 +64,8 @@ test.cb('complex generate', t => {
   })
 })
 
-test('with blank space', t => {
+// 测试带有合并单元格的情况
+test('with merged cells', t => {
   const props = [
     { key: 'a' },
     { 
@@ -93,7 +96,8 @@ test('with blank space', t => {
   t.is(htmlTable, fs.readFileSync('test/fixtures/with-blank-space.html', 'UTF-8'))
 })
 
-test('with array and object value', t => {
+// 测试如何显示数组和对象的单元格
+test('with array and object cells', t => {
   const props = [ { key: 'a' }, { key: 'b' }, { key: 'c' } ]
   const data = [
     { a: 1, b: [2.1, 2.2, 2.3], c: 3 },
@@ -104,7 +108,8 @@ test('with array and object value', t => {
   t.is(htmlTable, fs.readFileSync('test/fixtures/with-array-and-object-value.html', 'UTF-8'))
 })
 
-test('generate with title', t => {
+// 测试属性定义中存在标题
+test('generate with title prop', t => {
   const props = [ 
     { key: 'a', title: 'A' },
     { key: 'b', title: 'B' },
@@ -119,7 +124,8 @@ test('generate with title', t => {
   t.is(htmlTable, fs.readFileSync('test/fixtures/simple_with_title.html', 'UTF-8'))
 })
 
-test('generate with string defs', t => {
+// 测试简单的字符串属性的定义
+test('generate with simple string props', t => {
   const props = ['a', 'b', 'c']
   const data = [
     { a: 1, b: 2, c: 3 },

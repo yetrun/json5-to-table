@@ -20,6 +20,7 @@
     "webpack-cli": "^3.3.10"
   },
   "dependencies": {
+    "ajv": "^6.11.0",
     "lodash.merge": "^4.6.2",
     "xlsx": "^0.15.1"
   }

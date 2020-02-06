@@ -532,6 +532,16 @@ ajv@^6.1.0, ajv@^6.10.2:
     json-schema-traverse "^0.4.1"
     uri-js "^4.2.2"
 
+ajv@^6.11.0:
+  version "6.11.0"
+  resolved "https://registry.npm.taobao.org/ajv/download/ajv-6.11.0.tgz#c3607cbc8ae392d8a5a536f25b21f8e5f3f87fe9"
+  integrity sha1-w2B8vIrjktilpTbyWyH45fP4f+k=
+  dependencies:
+    fast-deep-equal "^3.1.1"
+    fast-json-stable-stringify "^2.0.0"
+    json-schema-traverse "^0.4.1"
+    uri-js "^4.2.2"
+
 ansi-align@^3.0.0:
   version "3.0.0"
   resolved "https://registry.npm.taobao.org/ansi-align/download/ansi-align-3.0.0.tgz#b536b371cf687caaef236c18d3e21fe3797467cb"
@@ -1953,6 +1963,11 @@ fast-deep-equal@^2.0.1:
   version "2.0.1"
   resolved "https://registry.npm.taobao.org/fast-deep-equal/download/fast-deep-equal-2.0.1.tgz#7b05218ddf9667bf7f370bf7fdb2cb15fdd0aa49"
   integrity sha1-ewUhjd+WZ79/Nwv3/bLLFf3Qqkk=
+
+fast-deep-equal@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.npm.taobao.org/fast-deep-equal/download/fast-deep-equal-3.1.1.tgz?cache=0&sync_timestamp=1575383928809&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Ffast-deep-equal%2Fdownload%2Ffast-deep-equal-3.1.1.tgz#545145077c501491e33b15ec408c294376e94ae4"
+  integrity sha1-VFFFB3xQFJHjOxXsQIwpQ3bpSuQ=
 
 fast-diff@^1.1.2:
   version "1.2.0"
