@@ -1,5 +1,5 @@
-const test = require('./test')
-const generateProps = require('../lib/generateProps')
+const test = require('../test')
+const generateProps = require('../../lib/jsonToTable/generateProps')
 
 test('object', t => {
   const data = { a: 1, b: 2, c: 3 }

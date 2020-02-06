@@ -1,6 +1,6 @@
-const test = require('./test')
-const generateTable = require('../lib/generateTableObject')
-const { Table, Row, Data } = require('../lib/table_defs')
+const test = require('../test')
+const generateTable = require('../../lib/jsonToTable/generateTableObject')
+const { Table, Row, Data } = require('../../lib/jsonToTable/table_defs')
 
 test('object', t => {
   const props = [ { key: 'a' }, { key: 'b' }, { key: 'c' } ]

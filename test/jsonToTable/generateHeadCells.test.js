@@ -1,6 +1,6 @@
-const test = require('./test')
-const generateCells = require('../lib/generateHeadCells')
-const { AddressableCells } = require('../lib/table_defs')
+const test = require('../test')
+const generateCells = require('../../lib/jsonToTable/generateHeadCells')
+const { AddressableCells } = require('../../lib/jsonToTable/table_defs')
 
 test('props', t => {
   const props = [ { key: 'a' }, { key: 'b' }, { key: 'c' } ]
