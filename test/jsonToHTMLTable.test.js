@@ -93,7 +93,7 @@ test('with merged cells', t => {
   ]
 
   const htmlTable = jsonToHTMLTable(data, props)
-  t.is(htmlTable, fs.readFileSync('test/fixtures/with-blank-space.html', 'UTF-8'))
+  t.is(htmlTable, fs.readFileSync('test/fixtures/with_merged_cells.html', 'UTF-8'))
 })
 
 // 测试如何显示数组和对象的单元格
@@ -105,7 +105,7 @@ test('with array and object cells', t => {
   ]
 
   const htmlTable = jsonToHTMLTable(data, props)
-  t.is(htmlTable, fs.readFileSync('test/fixtures/with-array-and-object-value.html', 'UTF-8'))
+  t.is(htmlTable, fs.readFileSync('test/fixtures/with_array_and_object_value.html', 'UTF-8'))
 })
 
 // 测试属性定义中存在标题
