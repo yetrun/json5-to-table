@@ -56,15 +56,3 @@ test.cb('generate to stream', t => {
     t.end()
   })
 }) 
-
-// 复杂 value 的显示是每个 jsonToTable 实现自己的责任
-test('generate with object values', t => {
-  const props = [ { key: 'a' }, { key: 'b' }, { key: 'c' } ]
-  const data = [
-    { a: 1, b: [2.1, 2.2, 2.3], c: 3 },
-    { a: 4, b: { k1: 5.1, k2: 5.2 }, c: 6 }
-  ]
-
-  const htmlTable = jsonToHTMLTable(data, props)
-  t.is(htmlTable, fs.readFileSync('test/fixtures/with_object_values.html', 'UTF-8'))
-})

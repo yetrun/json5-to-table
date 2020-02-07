@@ -212,6 +212,7 @@ function jsonToCustomize (data, props) {
 - `rs`: 单元格纵跨的行数
 - `cs`: 单元格横跨的列数
 - `v`: 该单元格的内容
+- `stringValue`: `v` 的字符串表示。一般来说，写入到单元格的内容使用该属性。
 
 ## 备忘
 
