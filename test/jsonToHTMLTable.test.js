@@ -14,7 +14,23 @@ test('generate string', t => {
   t.is(htmlTable, fs.readFileSync('test/fixtures/simple.html', 'UTF-8'))
 })
 
-test.cb('generate file', t => {
+test.cb('generate to file', t => {
+  const props = [ { key: 'a' }, { key: 'b' }, { key: 'c' } ]
+  const data = [
+    { a: 1, b: 2, c: 3 },
+    { a: 4, b: 5, c: 6 }
+  ]
+
+  const stream = jsonToHTMLTable(data, props, {
+    writeTo: 'test/temp/1.html'
+  })
+  stream.on('finish', () => {
+    t.is(fs.readFileSync('test/temp/1.html', 'UTF-8'), fs.readFileSync('test/fixtures/simple.html', 'UTF-8'))
+    t.end()
+  })
+})
+
+test.cb('generate to stream', t => {
   const props = [ { key: 'a' }, { key: 'b' }, { key: 'c' } ]
   const data = [
     { a: 1, b: 2, c: 3 },

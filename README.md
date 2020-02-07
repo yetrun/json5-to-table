@@ -159,7 +159,9 @@ jsonToHTMLTable(data, [props], [options])
 
 options 详解：
 
-- `writeTo`: 生成的源码写入的地方，该参数应该传入一个流（Stream）。
+- `format`: 生成的格式，`dom` 表示生成 HTML Table 元素， `source` 表示生成字符串。
+            默认根据环境判定，node 环境下默认值为 `source`，浏览器环境下默认值为 `dom`.
+- `writeTo`: 如果是一个字符串，则写入到本地文件；否则，写入到一个流。
 
 返回：
 
