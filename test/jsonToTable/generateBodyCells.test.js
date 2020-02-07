@@ -1,6 +1,15 @@
 const test = require('../test')
-const generateCells = require('../../lib/jsonToTable/generateBodyCells')
+const normalizeProps = require('../../lib/jsonToTable/normalizeProps')
+const generateBodyCells = require('../../lib/jsonToTable/generateBodyCells')
 const { AddressableCells } = require('../../lib/jsonToTable/table_defs')
+
+function generateCells (data, props, ...params) {
+  return generateBodyCells(
+    data,
+    normalizeProps(props),
+    ...params
+  )
+}
 
 test('object', t => {
   const props = [ { key: 'a' }, { key: 'b' }, { key: 'c' } ]
@@ -230,7 +239,97 @@ test('object with two levels object array', t => {
   ))
 })
 
-test('specify start position', t => {
+test('allocation algorithm', t => {
+  const props = [
+    { 
+      key: 'a', 
+      props: [ 'a1', 'a2' ]
+    }, 
+    { 
+      key: 'b',
+      props: [ 'b1', 'b2' ]
+    }
+  ]
+  const data = {
+    a: [
+      { a1: 1, a2: 2 },
+      { a1: 3, a2: 4 }
+    ],
+    b: [
+      { b1: 5, b2: 6 },
+      { b1: 7, b2: 8 },
+      { b1: 9, b2: 10 },
+      { b1: 11, b2: 12 },
+      { b1: 13, b2: 14 }
+    ]
+  }
+
+  const cells = generateCells(data, props)
+  t.deepEqual(cells, new AddressableCells(    
+    { r: 1, c: 1, rs: 2, v: 1 },
+    { r: 1, c: 2, rs: 2, v: 2 },
+    { r: 3, c: 1, rs: 2, v: 3 },
+    { r: 3, c: 2, rs: 2, v: 4 },
+    { r: 5, c: 1, cs: 2 },
+    { r: 1, c: 3, v: 5 },
+    { r: 1, c: 4, v: 6 },
+    { r: 2, c: 3, v: 7 },
+    { r: 2, c: 4, v: 8 },
+    { r: 3, c: 3, v: 9 },
+    { r: 3, c: 4, v: 10 },
+    { r: 4, c: 3, v: 11 },
+    { r: 4, c: 4, v: 12 },
+    { r: 5, c: 3, v: 13 },
+    { r: 5, c: 4, v: 14 }
+  ))
+})
+
+test('allocation algorithm: heterogeneous', t => {
+  const props = [
+    { 
+      key: 'a', 
+      props: [ 'a1', 'a2' ]
+    }, 
+    { 
+      key: 'b'
+    }
+  ]
+  const data = [
+    {
+      a: [
+        { a1: 1, a2: 2 },
+        { a1: 3, a2: 4 }
+      ],
+      b: 5
+    },
+    {
+      a: [
+        { a1: 6, a2: 7 },
+        { a1: 8, a2: 9 },
+        { a1: 10, a2: 11 }
+      ],
+      b: 12
+    }
+  ]
+
+  const cells = generateCells(data, props)
+  t.deepEqual(cells, new AddressableCells(    
+    { r: 1, c: 1, v: 1 },
+    { r: 1, c: 2, v: 2 },
+    { r: 2, c: 1, v: 3 },
+    { r: 2, c: 2, v: 4 },
+    { r: 1, c: 3, rs: 2, v: 5 },
+    { r: 3, c: 1, v: 6 },
+    { r: 3, c: 2, v: 7 },
+    { r: 4, c: 1, v: 8 },
+    { r: 4, c: 2, v: 9 },
+    { r: 5, c: 1, v: 10 },
+    { r: 5, c: 2, v: 11 },
+    { r: 3, c: 3, rs: 3, v: 12 }
+  ))
+})
+
+test('specify row from', t => {
   const props = [ { key: 'a' }, { key: 'b' }, { key: 'c' } ]
   const data = { a: 1, b: 2, c: 3 }
 
