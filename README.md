@@ -162,6 +162,7 @@ options 详解：
 - `format`: 生成的格式，`dom` 表示生成 HTML Table 元素， `source` 表示生成字符串。
             默认根据环境判定，node 环境下默认值为 `source`，浏览器环境下默认值为 `dom`.
 - `writeTo`: 如果是一个字符串，则写入到本地文件；否则，写入到一个流。
+- `indent`: 缩进宽度，默认值为 2.
 
 返回：
 
