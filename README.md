@@ -214,24 +214,6 @@ function jsonToCustomize (data, props) {
 - `v`: 该单元格的内容
 - `stringValue`: `v` 的字符串表示。一般来说，写入到单元格的内容使用该属性。
 
-## 备忘
+# License
 
-### 做都没做
-
-- [x] title
-- [x] 简写
-- [ ] 顺序
-
-### Unresolved Tips
-
-- [ ] 如何让 ava 仅仅显示错误的测试名（很有用）
-- [ ] XLSX 貌似不支持 stream
-- [ ] 我需要快速生成 HTML Table 用作测试
-
-### 平均行数的问题
-
-1. (a, a), (b, b, b)
-2. (a, a), (b, b, b, b)
-3. ((a, a), a)
-
-总之，我要修改成我要占用多少行的问题（这用到一个分配算法），然后根据分配算法来。
+LGPL-2.1
