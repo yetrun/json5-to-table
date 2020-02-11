@@ -175,7 +175,10 @@ options 详解：
 jsonToExcel(data, [props], [toPath])
 ```
 
-生成 Excel 格式的表格，并写入到`toPath`指定的路径。如果`toPath`省略，则返回 Buffer.
+生成 Excel 格式的表格，并写入到`toPath`指定的路径；如果`toPath`省略，则返回表格的二进制内容。
+
+该函数根据运行环境做出合适的响应。这意味着，指定`toPath`时，node 环境下写入到本地文件，浏览器环境下表现为下载文件；未指定`toPath`时，node 环境和浏览器环境返回相应的格式，它们都易于写入到本地文件或者构建一个 Blob 对象用于 HTML5 File API.
+
 
 ## 扩展
 

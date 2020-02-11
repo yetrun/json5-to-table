@@ -4,5 +4,8 @@ module.exports = {
   output: {
     filename: 'json-to-table.js',
     library: 'JSONToTable'
+  },
+  externals: {
+    fs: 'fs'
   }
 }
