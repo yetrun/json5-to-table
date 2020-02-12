@@ -1,0 +1,11 @@
+table, table th, table td { border: 1px solid #0094ff; }
+table { width: 200px; min-height: 25px; line-height: 25px; text-align: center; border-collapse: collapse;}   
+ol li { margin: 10px 0; }
+
+.split-panes {
+  display: flex;
+}
+
+.split-panes > * {
+  width: 50%;
+}

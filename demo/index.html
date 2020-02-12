@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>JSON To Table Demo</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="split-panes">
+      <div>
+        <h2>测试 jsonToHTMLTable</h2>
+        <ol>
+          <li>
+            <button id="html.toSource">生成 Table 源码</button>
+            <pre id="html.sourceContainer"></pre>
+          </li>
+          <li>
+            <button id="html.toDom">生成 Table DOM</button>
+            <pre id="html.domContainer"></pre>
+          </li>
+        </ol>
+      </div>
+      <div>
+        <h2>测试 jsonToExcel</h2>
+        <ol>
+          <li>
+            <button id="excel.exportFile">导出文件</button>
+          </li>
+          <li>
+            <button id="excel.generateBlob">生成 Blob</button>
+            你可以在控制台看到 Blob 的内容
+          </li>
+        </ol>
+      </div>
+    </div>
+    <script src="../dist/json-to-table.js"></script>
+    <script src="index.js"></script>
+  </body>
+</html>
