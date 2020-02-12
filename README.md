@@ -4,52 +4,47 @@
 
 ## 快速上手
 
-[未发布]
+### 引用
+
+推荐使用`npm`或`yarn`安装：
+
+```bash
+npm install nested-json-to-table
+```
+
+或者可以直接使用打包好的 dist 文件，下载地址：
+
+> https://gitee.com/run27017/nested-json-to-table/raw/v1/dist/nested-json-to-table.min.js
+
+### 渲染效果
 
 如下可以生成 HTML 的表格源码：
 
 ```javascript
 const { jsonToHTMLTable } = require('json-to-table')
-
 const data = [
   {
     name: 'Jim',
     age: 18,
     courses: [
-      {
-        title: 'English',
-        score: 87
-      },
-      {
-        title: 'Chinese',
-        score: 67
-      }
+      { title: 'English', score: 87 },
+      { title: 'Chinese', score: 67 }
     ]
   },
   {
     name: 'Lucy',
     age: 17,
     courses: [
-      {
-        title: 'Math',
-        score: 97
-      },
-      {
-        title: 'Music',
-        score: 77
-      },
-      {
-        title: 'Gym',
-        score: 57
-      }
+      { title: 'Math', score: 97 },
+      { title: 'Music', score: 77 },
+      { title: 'Gym', score: 57 }
     ]
   }
 ]
-
 const tableHTML = jsonToHTMLTable(data)
 ```
 
-生成的表格渲染如下：
+渲染的表格如下：
 
 <table>
   <thead>
@@ -95,31 +90,38 @@ const tableHTML = jsonToHTMLTable(data)
 
 ### Props
 
-`json-to-table` 将普通的 JavaScript 数组渲染成表格数据，表格的头可以通过一个 `props` 的概念声明。最简单的声明 props 的示例大致如下：
-
-```javascript
-const props = [ { key: 'a' }, { key: 'b' }, { key: 'c' } ]
-const data = [{ a: 1, b: 2, c: 3 }, { a: 4, b: 5, c: 6 }]
-const tableHTML = jsonToHTMLTable(data, props)
-```
-
-以上即指定表头为`a`、`b`、`c`. 建议始终指定表头，否则表头将从`data`中提取，而提取的结果往往不符合预期。
-
 #### 仅声明感兴趣的部分
 
-声明 props 的第一个用途，是仅仅声明我们需要的字段。例如
+原始的`data`可能会混杂大量无关的字段，而我们想要生成表格时可能只需要其中的部分字段。怎么办呢？声明`props`就好了：
 
 ```javascript
 const props = [ { key: 'a' }, { key: 'b' } ]
+const data = [
+  { a: 1, b: 2, c: 3, d: 4, e: 5 },
+  { a: 6, b: 7, c: 8, d: 9, e: 10 }
+]
+const tableHTML = jsonToHTMLTable(data, props)
+```
+
+以上代码渲染表格时，仅仅只会提取字段`a`、`b`的内容。
+
+#### 声明标题
+
+声明`props`的另一个目的，是需要定义头部标题的显示文本。如下，如果不定义`title`部分，则显示的头列为`a | b |c`；定义`title`后，则头列显示为`A | B | C`.
+
+```javascript
+const props = [
+  { key: 'a', title: 'A' },
+  { key: 'b', title: 'B' },
+  { key: 'c', title: 'C' }
+]
 const data = [{ a: 1, b: 2, c: 3 }, { a: 4, b: 5, c: 6 }]
 const tableHTML = jsonToHTMLTable(data, props)
 ```
 
-仅仅只会拿字段`a`、`b`做表格。
-
 #### 重排顺序
 
-声明 props 的第二个用途，是重排表格中列的顺序：
+`props`的顺序极为表格列的排列顺序。如果不定义`props`，则排列顺序很难预测。
 
 ```javascript
 const props = [ { key: 'b' }, { key: 'c' }, { key: 'a' } ]
@@ -127,11 +129,9 @@ const data = [{ a: 1, b: 2, c: 3 }, { a: 4, b: 5, c: 6 }]
 const tableHTML = jsonToHTMLTable(data, props)
 ```
 
-现在表格列从左到右的顺序分别是：`b`、`c`、`a`.
-
 #### 内部 props 声明
 
-对于嵌套的数据，可以声明内部的 props：
+因为支持嵌套的表格渲染，所以可以定义内部的`props`:
 
 ```javascript
 const props = [
@@ -147,6 +147,20 @@ const data = [
   { a: 5, b: { c: 6, d: 7 }, e: 8 }
 ]
 const tableHTML = jsonToHTMLTable(data, props)
+```
+
+#### 简单写法
+
+如果你觉得有些写法过于繁琐，还有一种简单的写法。如下：
+
+```javascript
+const props = ['a', 'b', 'c']
+```
+
+等价于：
+
+```javascript
+const props = [ { key: 'a' }, { key: 'b' }, { key: 'c' } ]
 ```
 
 ## API
