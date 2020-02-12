@@ -1,8 +1,8 @@
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   entry: './lib/index',
   output: {
-    filename: 'json-to-table.js',
+    filename: 'json-to-table.min.js',
     library: 'JSONToTable'
   },
   externals: {
