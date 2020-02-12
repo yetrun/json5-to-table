@@ -1,5 +1,5 @@
 {
-  "name": "json-to-table",
+  "name": "nested-json-to-table",
   "version": "1.0.0-developing",
   "description": "JSON 转化为表格的工具",
   "main": "lib/index.js",
