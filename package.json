@@ -1,9 +1,10 @@
 {
   "name": "nested-json-to-table",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "JSON 转化为表格的工具",
   "main": "lib/index.js",
   "author": "run27017 <run27017@126.com>",
+  "repository": "run27017/json-to-table",
   "license": "LGPL-2.1",
   "scripts": {
     "build": "webpack",

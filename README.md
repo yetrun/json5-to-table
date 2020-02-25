@@ -1,6 +1,8 @@
 # json-to-table
 
-> 一个将 JSON 数据转化为表格形式的工具，支持深层次的嵌套。
+> 一个将 JSON 数据转化为表格形式的工具，支持深层次的嵌套。项目主页：
+>
+> https://github.com/run27017/json-to-table
 
 ## 快速上手
 
@@ -12,16 +14,21 @@
 npm install nested-json-to-table
 ```
 
-或者可以直接使用打包好的 dist 文件，下载地址：
+或者使用打包文件（查看 [dist/json-to-table.min.js](dist/json-to-table.min.js)），放在浏览器的`<script>`标签：
 
-> https://gitee.com/run27017/nested-json-to-table/raw/v1/dist/nested-json-to-table.min.js
+```html
+<script src="dist/json-to-table.min.js"></script>
+<script>
+const { jsonToHTMLTable } = JSONToTable
+</script>
+```
 
 ### 渲染效果
 
 如下可以生成 HTML 的表格源码：
 
 ```javascript
-const { jsonToHTMLTable } = require('json-to-table')
+const { jsonToHTMLTable } = require('nested-json-to-table')
 const data = [
   {
     name: 'Jim',
@@ -201,7 +208,7 @@ jsonToExcel(data, [props], [toPath])
 v1 的方式称之为 Context. 库提供一个 Context，扩展者使用 Context 实现自己的自由扩展。Context 提供生成 cells 的方法。虽然说样板代码更多了，但理解起来更为简单。
 
 ```javascript
-const { Context } = require('json-to-table')
+const { Context } = require('nested-json-to-table')
 
 function jsonToCustomize (data, props) {
   const context = new Context()
