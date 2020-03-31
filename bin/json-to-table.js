@@ -1,0 +1,21 @@
+#!/usr/bin/env node
+
+/* 一个简单的命令行工具，从标准输入读取 json，转化为 HTML 表格从标准输出输出。
+ *
+ */
+
+const { jsonToHTMLTable } = require('../lib')
+
+process.stdin.setEncoding('utf8')
+
+let text = ''
+
+process.stdin.on('data', function(chunk) {
+  text += chunk
+})
+
+process.stdin.on('end', function() {
+  const data = JSON.parse(text)
+  const table = jsonToHTMLTable(data)
+  console.log(table)
+})

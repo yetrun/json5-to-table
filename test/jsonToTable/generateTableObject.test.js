@@ -179,3 +179,16 @@ test('simple generate with title', t => {
     [1, 2, 3]
   ))
 })
+
+test('missing some deep props', t => {
+  const props = [
+    { key: 'a', title: 'a' },
+    { key: 'b', title: 'b', props: 
+      [ { key: 'c', title: 'c' } ]
+    }
+  ]
+  const data = { "a": 9 }
+
+  const table = generateTable(data, props)
+  t.pass()
+})
