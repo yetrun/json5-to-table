@@ -29,7 +29,6 @@ test('array', t => {
   ]
 
   const props = generateProps(data)
-  console.log('props', props)
   t.deepEqual(props, [ { key: 'a' }, { key: 'b' }, { key: 'c' } ])
 })
 
@@ -57,4 +56,12 @@ test('array -> array', t => {
     },
     { key: 'f' }
   ])
+})
+
+// 从空数组中生成数据时，不产生内部 props，因为现有代码对于处理空的 props 数组有 Bug
+test('generate from empty array value', t => {
+  const data = [ { alerts: [] } ]
+
+  const props = generateProps(data)
+  t.deepEqual(props, [ { key: 'alerts' }])
 })
