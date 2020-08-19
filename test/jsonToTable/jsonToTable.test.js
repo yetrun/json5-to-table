@@ -180,3 +180,24 @@ test('generate with simple string define', t => {
     )
   ])
 })
+
+test('from issue 9', t => {
+  const data = [
+    {
+      "sysconf": {
+        "hosts": [
+          {
+            "key": "node001",
+            "value": "192.168.0.1"
+          },
+          {
+            "key": null,
+            "value": "192.168.0.2"
+          }
+        ]
+      }
+    }
+  ]
+  const rows = jsonToTable(data)
+  t.pass()
+})
