@@ -3,3 +3,5 @@ yarn-error.log
 
 /test/temp/*
 !/test/temp/.keep
+
+/dist
