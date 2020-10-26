@@ -11,7 +11,7 @@ function generateSameXLSX (t, sourceBuffers, ws) {
 }
 
 test('simple generate', t => {
-  const props = [ { key: 'a' }, { key: 'b' }, { key: 'c' } ]
+  const props2 = [ { key: 'a' }, { key: 'b' }, { key: 'c' } ]
   const data = [
     { a: 1, b: 2, c: 3 },
     { a: 4, b: 5, c: 6 }
