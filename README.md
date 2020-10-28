@@ -6,26 +6,9 @@
 
 ## 快速上手
 
-### 引用
-
-推荐使用`npm`或`yarn`安装：
-
-```bash
-npm install nested-json-to-table
-```
-
-或者使用打包文件（查看 [dist/json-to-table.min.js](dist/json-to-table.min.js)），放在浏览器的`<script>`标签：
-
-```html
-<script src="dist/json-to-table.min.js"></script>
-<script>
-const { jsonToHTMLTable } = JSONToTable
-</script>
-```
-
 ### 渲染效果
 
-如下可以生成 HTML 的表格源码：
+如下生成 HTML 的表格源码：
 
 ```javascript
 const { jsonToHTMLTable } = require('nested-json-to-table')
@@ -92,6 +75,31 @@ const tableHTML = jsonToHTMLTable(data)
     </tr>
   </tbody>
 </table>
+
+### 安装
+
+推荐使用 `npm` 或 `yarn` 安装：
+
+```bash
+npm install nested-json-to-table
+```
+
+或者使用打包好的文件：[Releases](https://github.com/run27017/json-to-table/releases)
+
+```html
+<script src="/path/to/json-to-table.min.js"></script>
+<script>
+const { jsonToHTMLTable } = JSONToTable
+</script>
+```
+
+关于 WebPack 打包，需要处理 node 和 browser 环境。如果你是在浏览器环境，在 WebPack 的相关配置文件下加入：
+
+```js
+  externals: {
+    fs: 'fs'
+  }
+```
 
 ## 概念
 
