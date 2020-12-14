@@ -6,7 +6,13 @@
   "author": "run27017 <run27017@126.com>",
   "repository": "run27017/json-to-table",
   "license": "LGPL-2.1",
-  "keywords":["json-to-table", "nested-json-to-table", "json-to-html", "json-to-excel", "nested-json"],
+  "keywords": [
+    "json-to-table",
+    "nested-json-to-table",
+    "json-to-html",
+    "json-to-excel",
+    "nested-json"
+  ],
   "scripts": {
     "build": "webpack",
     "test": "ava"
@@ -23,6 +29,7 @@
   },
   "dependencies": {
     "ajv": "^6.11.0",
+    "json5": "^2.1.3",
     "lodash.clonedeep": "^4.5.0",
     "lodash.merge": "^4.6.2",
     "xlsx": "^0.15.1"

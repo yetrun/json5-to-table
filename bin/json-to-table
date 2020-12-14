@@ -4,6 +4,7 @@
  *
  */
 
+const JSON5 = require('json5')
 const { jsonToHTMLTable } = require('../lib')
 
 process.stdin.setEncoding('utf8')
@@ -15,7 +16,7 @@ process.stdin.on('data', function(chunk) {
 })
 
 process.stdin.on('end', function() {
-  const data = JSON.parse(text)
+  const data = JSON5.parse(text)
   const table = jsonToHTMLTable(data)
   console.log(table)
 })
