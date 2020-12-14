@@ -65,3 +65,19 @@ test('generate from empty array value', t => {
   const props = generateProps(data)
   t.deepEqual(props, [ { key: 'alerts' }])
 })
+
+test('primitive array', t => {
+  const data = [
+    {
+      name: '张三',
+      hobby: [ "看书", "看电影", "打篮球" ],
+    },
+    {
+      name: '李四',
+      hobby: [ "爬山", "看书" ]
+    }
+  ]
+
+  const props = generateProps(data)
+  t.deepEqual(props, [ { key: 'name' }, { key: 'hobby' } ])
+})
