@@ -1,0 +1,9 @@
+{
+  "name": "json5-to-table",
+  "version": "0.1.0-preview",
+  "description": "JSON 转化为表格的工具，支持深层嵌套数据，支持模式定义",
+  "main": "lib/index.js",
+  "repository": "https://github.com/yetrun/json5-to-table",
+  "author": "hi@yet.run",
+  "license": "Apache-2.0"
+}
