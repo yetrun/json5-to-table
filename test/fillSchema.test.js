@@ -105,7 +105,6 @@ test('fill nested schemas while schema is array', t => {
   const matrix = new Matrix(2, 3)
 
   fillSchema(schema, matrix)
-  // TODO: 谁是 actual、谁是 expected
   t.deepEqual(matrix.toArray(), [
     [ { val: 'A', rowSpan: 1, colSpan: 2 }, 
       undefined,
