@@ -3,10 +3,10 @@
 ## 函数定义
 
 ```javascript
-function fillData(dataObject, schemaObject, matrixView)
+function fillData(data, schema, matrixView)
 ```
 
-该函数把 `dataObject` 按照 `schemaObject` 规定的模式**充满**到 `matrixView` 中去。`schemaObject` 是以下类型的对象或对象数组：
+该函数把 `data` 按照 `schema` 规定的模式**充满**到 `matrixView` 中去。`schemaObject` 是以下类型的对象或对象数组：
 
 - `{ title: 'A', path: 'a' }`
 - `{ title: 'A', path: 'nested.a' }`
@@ -16,7 +16,7 @@ function fillData(dataObject, schemaObject, matrixView)
 
 由于客户数据是千差万别甚至是不规范的，所以“兼容性”是这个函数优先考虑的问题。
 
-首先，我们声明，该函数不检查 `matrix` 是否越界的问题。
+首先，我们声明，该函数不检查 `matrixView` 是否越界的问题。
 
 兼容的考虑是对数据的高度容忍度。哪怕数据有些不规范，我们仍然希望数据能够合理地填充进去。`schema` 的基本格式是 `{ title: 'title', path: 'key' }`，从这里处罚，涵盖兼容性考虑主要有：
 
