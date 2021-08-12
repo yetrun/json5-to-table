@@ -1,5 +1,5 @@
 const test = require('ava')
-const Matrix = require('../lib/Matrix')
+const Matrix = require('../lib/matrix')
 
 test('case one', t => {
   const matrix = new Matrix(4, 1)
@@ -13,4 +13,11 @@ test('case one', t => {
     [2],
     [ undefined ]
   ])
+})
+
+test('case two', t => {
+  const matrix = new Matrix(2, 1)
+  const subMatrix = matrix.subview(1, 0)
+
+  t.is(subMatrix.rows, 1)
 })
