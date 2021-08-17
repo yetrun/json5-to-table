@@ -139,3 +139,45 @@ test('generate table for complex object array', t => {
     ]
   })
 })
+
+test('no given schema', t => {
+  const data = [
+    { a: 1, b: { c: 2, d: 3 } },
+    { a: 4, b: { c: 5, d: 6 } }
+  ]
+
+  const table = generateTable(data)
+  t.notDeepEqual(table, generateTable(data, null, { parseDataToSchema: 'flatten' }))
+  t.deepEqual(table, generateTable(data, null, { parseDataToSchema: 'stack' }))
+})
+
+test('normalize schema', t => {
+  const schema = [ 'a', 'b', 'c' ]
+  const data = [
+    { a: 1, b: 2, c: 3 },
+    { a: 4, b: 5, c: 6 }
+  ]
+
+  const table = generateTable(data, schema)
+  t.deepEqual(table, {
+    header: [
+      [
+        { row: 1, col: 1, rowSpan: 1, colSpan: 1, val: 'a' },
+        { row: 1, col: 2, rowSpan: 1, colSpan: 1, val: 'b' },
+        { row: 1, col: 3, rowSpan: 1, colSpan: 1, val: 'c' }
+      ]
+    ],
+    body: [
+      [
+        { row: 2, col: 1, rowSpan: 1, colSpan: 1, val: 1 },
+        { row: 2, col: 2, rowSpan: 1, colSpan: 1, val: 2 },
+        { row: 2, col: 3, rowSpan: 1, colSpan: 1, val: 3 }
+      ],
+      [
+        { row: 3, col: 1, rowSpan: 1, colSpan: 1, val: 4 },
+        { row: 3, col: 2, rowSpan: 1, colSpan: 1, val: 5 },
+        { row: 3, col: 3, rowSpan: 1, colSpan: 1, val: 6 }
+      ]
+    ]
+  })
+})
