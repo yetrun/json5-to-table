@@ -114,3 +114,31 @@ test('fill nested schemas while schema is array', t => {
       undefined ]
   ])
 })
+
+// title 是空字符串的情况
+test('title is empty string', t => {
+  const schema = { title: 'A', props: [
+    { title: '' }
+  ] }
+  const matrix = new Matrix(2, 1)
+
+  fillSchema(schema, matrix)
+  t.deepEqual(matrix.toArray(), [
+    [ { val: 'A', rowSpan: 2, colSpan: 1 } ],
+    [ undefined ]
+  ])
+})
+
+test('empty string title among multiple schemas', t => {
+  const schema = [
+    { title: ''},
+    { title: 'A'}
+  ]
+  const matrix = new Matrix(1, 2)
+
+  fillSchema(schema, matrix)
+  t.deepEqual(matrix.toArray(), [
+    [ undefined,
+      { val: 'A', rowSpan: 1, colSpan: 1 } ]
+  ])
+})
