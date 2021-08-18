@@ -28,3 +28,8 @@ test('retrieve from deepin array', t => {
   }, 'a.b')
   t.deepEqual(value, [1, 3])
 })
+
+test('retrieve full value', t => {
+  const value = retrieveProperty(1, '')
+  t.deepEqual(value, 1)
+})

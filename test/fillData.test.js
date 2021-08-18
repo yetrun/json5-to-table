@@ -57,6 +57,31 @@ test('fill missing property', t => {
   ])
 })
 
+// path 是空白字符串
+test('fill full value', t => {
+  const schema = { path: '' }
+  const data = 1
+  const matrix = new Matrix(1, 1)
+
+  fillData(data, schema, matrix)
+  t.deepEqual(matrix.toArray(), [
+    [ { val: 1, rowSpan: 1, colSpan: 1 } ]
+  ])
+})
+
+test('fill full values of array', t => {
+  const schema = { path: '' }
+  const data = [1, 2, 3] 
+  const matrix = new Matrix(3, 1)
+
+  fillData(data, schema, matrix)
+  t.deepEqual(matrix.toArray(), [
+    [ { val: 1, rowSpan: 1, colSpan: 1 } ],
+    [ { val: 2, rowSpan: 1, colSpan: 1 } ],
+    [ { val: 3, rowSpan: 1, colSpan: 1 } ]
+  ])
+})
+
 test('fill simple object', t => {
   const schema = { path: 'a' }
   const data = { a: 1 }
