@@ -35,17 +35,6 @@ test('fill empty object', t => {
   ])
 })
 
-test('fill empty array', t => {
-  const schema = { path: 'a' }
-  const data = []
-  const matrix = new Matrix(1, 1)
-
-  fillData(data, schema, matrix)
-  t.deepEqual(matrix.toArray(), [
-    [ { val: undefined, rowSpan: 1, colSpan: 1 } ]
-  ])
-})
-
 test('fill missing property', t => {
   const schema = { path: 'a' }
   const data = { b: 1 } 
@@ -274,5 +263,89 @@ test('fill when schema is array and the first schema item occupy multiple colomn
     [ { val: 1, rowSpan: 1, colSpan: 1 }, 
       { val: 2, rowSpan: 1, colSpan: 1 },
       { val: 3, rowSpan: 1, colSpan: 1 } ]
+  ])
+})
+
+// 空白数组
+test('fill empty array', t => {
+  const schema = { path: 'a' }
+  const data = []
+  const matrix = new Matrix(1, 1)
+
+  fillData(data, schema, matrix)
+  t.deepEqual(matrix.toArray(), [
+    [ { val: undefined, rowSpan: 1, colSpan: 1 } ]
+  ])
+})
+
+test('fill empty array into multiple rows', t => {
+  const schema = { path: 'a' }
+  const data = []
+  const matrix = new Matrix(2, 1)
+
+  fillData(data, schema, matrix)
+  t.deepEqual(matrix.toArray(), [
+    [ { val: undefined, rowSpan: 2, colSpan: 1 } ],
+    [ undefined ]
+  ])
+})
+
+test('fill empty array with multiple schemas', t => {
+  const schema = [ 
+    { path: 'a' },
+    { path: 'b' }
+  ]
+  const data = []
+  const matrix = new Matrix(2, 2)
+
+  fillData(data, schema, matrix)
+  t.deepEqual(matrix.toArray(), [
+    [ { val: undefined, rowSpan: 2, colSpan: 2 },
+      undefined
+    ],
+    [ undefined,
+      undefined
+    ]
+  ])
+})
+
+test('one property is an empty array', t => {
+  const schema = [ 
+    { path: 'a' },
+    { path: 'b', props: [
+      { path: 'b1' },
+      { path: 'b2' }
+    ] },
+    { path: 'c', props: [
+      { path: 'c1' },
+      { path: 'c2' }
+    ]}
+  ]
+  const data = [
+    {
+      a: 1,
+      b: [],
+      c: [
+        { c1: 2, c2: 3 },
+        { c1: 4, c2: 5 }
+      ]
+    }
+  ]
+  const matrix = new Matrix(2, 5)
+
+  fillData(data, schema, matrix)
+  t.deepEqual(matrix.toArray(), [
+    [ { val: 1, rowSpan: 2, colSpan: 1 },
+      { val: undefined, rowSpan: 2, colSpan: 2 },
+      undefined,
+      { val: 2, rowSpan: 1, colSpan: 1 },
+      { val: 3, rowSpan: 1, colSpan: 1 }
+    ],
+    [ undefined,
+      undefined,
+      undefined,
+      { val: 4, rowSpan: 1, colSpan: 1 },
+      { val: 5, rowSpan: 1, colSpan: 1 }
+    ]
   ])
 })

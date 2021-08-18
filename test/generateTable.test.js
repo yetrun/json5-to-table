@@ -70,11 +70,11 @@ test('schema is nested but data is a empty array', t => {
         colSpan: 1,
         val: 1
       },
-      { // TODO: 此处的 colSpan 不为 2？ 
+      {
         row: 3,
         col: 2,
         rowSpan: 1,
-        colSpan: 1,
+        colSpan: 2,
         val: undefined
       },
       undefined
