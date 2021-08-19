@@ -16,9 +16,11 @@
     { "title": "B", "path": "b" },
     { "title": "C", "path": "c" }
   ],
-  "attributes": {
-    "table": {
-      "class": "c-table"
+  "options": {
+    "attributes": {
+      "table": {
+        "class": "c-table"
+      }
     }
   }
 }

@@ -1,0 +1,87 @@
+#!/usr/bin/env node
+
+const fs = require('fs')
+const yargs = require('yargs')
+const JSON5 = require('json5')
+const _ = require('lodash')
+const generateHTMLTable = require('../lib/generateHTMLTable')
+const generateExcel = function (data, schema) {
+  return require('../lib/generateExcel')(data, schema, { writeTo: '/dev/stdout' })
+}
+
+const argv = yargs
+  .option('data', {
+    alias: 'd',
+    description: 'JSON5 格式的数据文件',
+    type: 'string'
+  })
+  .option('schema', {
+    alias: 'e',
+    description: 'JSON5 格式的 Schema 文件',
+    type: 'string'
+  })
+  .option('options', {
+    alias: 'p',
+    description: 'JSON5 格式的 Options 文件，仅支持 --type=html',
+    type: 'string'
+  })
+  .option('type', {
+    alias: 't',
+    description: '生成的格式',
+    type: 'string',
+    choices: ['html', 'excel'],
+    conflicts: ['html', 'excel'] 
+  })
+  .option('html', {
+    description: '等效于 --type=html',
+    type: 'boolean'
+  })
+  .option('excel', {
+    description: '等效于 --type=excel',
+    type: 'boolean'
+  })
+  .conflicts('html', 'excel')
+  .version(false)
+  .help().alias('help', 'h')
+  .strict()
+  .middleware(function (argv) {
+    if (argv.html) {
+      argv.type = 'html'
+    } else if (argv.excel) {
+      argv.type = 'excel'
+    } else {
+      argv.type = argv.type || 'html'
+    }
+  })
+  .coerce('data', function (dataFile) {
+    dataFile = dataFile || '/dev/stdin'
+    return JSON5.parse(fs.readFileSync(dataFile))
+  })
+  .coerce('schema', function (schemaFile) {
+    if (schemaFile) {
+      return JSON5.parse(fs.readFileSync(schemaFile))
+    }
+  })
+  .coerce('options', function (optionsFile) {
+    if (optionsFile) {
+      return JSON5.parse(fs.readFileSync(optionsFile))
+    }
+  })
+  .argv
+
+let fn = argv.type === 'html' ? generateHTMLTable : generateExcel
+
+const keys = ['data', 'schema', 'options']
+let { data, schema, options } = _.pick(argv, keys)
+if (_.isNil(schema) 
+    && ('data' in data && 'schema' in data) 
+    && _.isEmpty(_.difference(Object.keys(data), keys))
+) {
+  // 从 data 中读取 schema
+  schema = data.schema
+  options = data.options
+  data = data.data
+}
+
+const htmlTable = fn(data, schema, options)
+console.log(htmlTable)
