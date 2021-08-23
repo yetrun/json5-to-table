@@ -2,11 +2,15 @@
   "name": "json5-to-table",
   "version": "0.1.0-preview",
   "description": "JSON 转化为表格的工具，支持深层嵌套数据，支持模式定义",
-  "main": "lib/index.js",
+  "main": "dist/bundle.js",
+  "bin": {
+    "json5-to-table": "./bin/json5-to-table"
+  },
   "repository": "https://github.com/yetrun/json5-to-table",
   "author": "hi@yet.run",
   "license": "Apache-2.0",
   "scripts": {
+    "build": "webpack",
     "test": "ava"
   },
   "ava": {
@@ -14,13 +18,22 @@
       "test/**/*"
     ]
   },
+  "files": ["README.md", "LICENSE", "bin", "dist"],
+  "keywords": ["nested", "json", "table", "schema", "html", "excel", "json-to-table"],
   "devDependencies": {
-    "ava": "^3.15.0"
+    "ava": "^3.15.0",
+    "xlsx": "^0.17.1"
   },
   "dependencies": {
     "json5": "^2.2.0",
-    "lodash": "^4.17.21",
-    "xlsx": "^0.17.1",
+    "lodash.difference": "^4.5.0",
+    "lodash.flatten": "^4.4.0",
+    "lodash.isfunction": "^3.0.9",
+    "lodash.isobject": "^3.0.2",
+    "lodash.isstring": "^4.0.1",
+    "lodash.merge": "^4.6.2",
+    "webpack": "^5.51.1",
+    "webpack-cli": "^4.8.0",
     "yargs": "^17.1.1"
   }
 }
