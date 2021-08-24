@@ -7,7 +7,7 @@ module.exports = {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
     library:{  
-      name: "jsonToTable",
+      name: "JSON5_TO_TABLE",
       type: "umd"
     },
     globalObject: 'this'
