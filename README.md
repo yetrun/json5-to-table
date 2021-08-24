@@ -32,10 +32,10 @@ $ yarn global add json5-to-table
 $ npm install --global json5-to-table
 ```
 
-也可以在浏览器内添加一个 script 标签：
+也可以在浏览器内添加一个 script 标签（请替换 0.1.x 为正确的版本，发布的版本可在 [Releases](https://github.com/yetrun/json5-to-table/releases) 中查看）：
 
 ```html
-<script lang="javascript" src="https://raw.githubusercontent.com/yetrun/json5-to-table/master/dist/bundle.js"></script>
+<script lang="javascript" src="https://github.com/yetrun/json5-to-table/releases/download/0.1.x/json5-to-table.js"></script>
 ```
 
 默认支持生成 HTML 格式。如果需要生成 Excel 格式，需同时安装依赖包：

@@ -4,9 +4,9 @@ const fs = require('fs')
 const yargs = require('yargs')
 const JSON5 = require('json5')
 const difference = require('lodash.difference')
-const generateHTMLTable = require('../lib/generateHTMLTable')
+const { generateHTMLTable, generateExcel: originalGenerateExcel } = require('..')
 const generateExcel = function (data, schema) {
-  return require('../lib/generateExcel')(data, schema, { writeTo: '/dev/stdout' })
+  return originalGenerateExcel(data, schema, { writeTo: '/dev/stdout' })
 }
 
 const argv = yargs
@@ -83,5 +83,7 @@ if ( (schema === undefined || schema === null)
   data = data.data
 }
 
-const htmlTable = fn(data, schema, options)
-console.log(htmlTable)
+const result = fn(data, schema, options)
+if (result) {
+  console.log(result)
+}
