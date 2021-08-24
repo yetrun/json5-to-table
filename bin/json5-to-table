@@ -3,7 +3,7 @@
 const fs = require('fs')
 const yargs = require('yargs')
 const JSON5 = require('json5')
-const _ = require('lodash')
+const difference = require('lodash.difference')
 const generateHTMLTable = require('../lib/generateHTMLTable')
 const generateExcel = function (data, schema) {
   return require('../lib/generateExcel')(data, schema, { writeTo: '/dev/stdout' })
@@ -72,10 +72,10 @@ const argv = yargs
 let fn = argv.type === 'html' ? generateHTMLTable : generateExcel
 
 const keys = ['data', 'schema', 'options']
-let { data, schema, options } = _.pick(argv, keys)
-if (_.isNil(schema) 
+let [ data, schema, options ] = keys.map(key => argv[key])
+if ( (schema === undefined || schema === null)
     && ('data' in data && 'schema' in data) 
-    && _.isEmpty(_.difference(Object.keys(data), keys))
+    && difference(Object.keys(data), keys).length === 0
 ) {
   // 从 data 中读取 schema
   schema = data.schema
