@@ -1,6 +1,6 @@
 {
   "name": "json5-to-table",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "JSON 数据转化为表格的工具，支持深层嵌套数据，支持模式定义",
   "main": "dist/bundle.js",
   "bin": {
@@ -18,10 +18,25 @@
       "test/**/*"
     ]
   },
-  "files": ["README.md", "LICENSE", "bin", "dist"],
-  "keywords": ["nested", "json", "table", "schema", "html", "excel", "json-to-table"],
+  "files": [
+    "README.md",
+    "LICENSE",
+    "bin",
+    "dist"
+  ],
+  "keywords": [
+    "nested",
+    "json",
+    "table",
+    "schema",
+    "html",
+    "excel",
+    "json-to-table"
+  ],
   "devDependencies": {
     "ava": "^3.15.0",
+    "webpack": "^5.51.1",
+    "webpack-cli": "^4.8.0",
     "xlsx": "^0.17.1"
   },
   "dependencies": {
@@ -32,8 +47,6 @@
     "lodash.isobject": "^3.0.2",
     "lodash.isstring": "^4.0.1",
     "lodash.merge": "^4.6.2",
-    "webpack": "^5.51.1",
-    "webpack-cli": "^4.8.0",
     "yargs": "^17.1.1"
   }
 }
