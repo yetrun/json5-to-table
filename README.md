@@ -1,8 +1,20 @@
-# json-to-table
-
-> 一个将 JSON 数据转化为表格形式的工具，支持深层次的嵌套。项目主页：
+> 本项目已迁移至[新地址](https://github.com/yetrun/json5-to-table)：
 >
-> https://github.com/run27017/json-to-table
+>     https://github.com/yetrun/json5-to-table
+>
+> 新的包 `json5-to-table` 支持更丰富、且更标准的模式定义，希望取得后续更新的朋友请移步[新地址](https://github.com/yetrun/json5-to-table)。 
+> 
+> 本项目之后将不再维护。旧版将继续提供使用，只是不再更新。
+
+=
+
+=
+
+=
+
+=
+
+# json-to-table
 
 ## 快速上手
 
