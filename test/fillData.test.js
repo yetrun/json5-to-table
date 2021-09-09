@@ -118,7 +118,7 @@ test('fill into crossing rows', t => {
 
 test('fill object array', t => {
   const schema = { path: 'a' }
-  const data = [{ a: 1, b: 0 }, { a: 2, b: 0 }]
+  const data = [{ a: 1 }, { a: 2 }]
   const matrix = new Matrix(2, 1)
 
   fillData(data, schema, matrix)
@@ -347,5 +347,35 @@ test('one property is an empty array', t => {
       { val: 4, rowSpan: 1, colSpan: 1 },
       { val: 5, rowSpan: 1, colSpan: 1 }
     ]
+  ])
+})
+
+// 每一条数据占据的行数是不同的
+test('every data item occupies different rows', t => {
+  const matrix = new Matrix(3, 1)
+  const data = [
+    {
+      "items": [
+        { "text": "item 1" },
+        { "text": "item 2" }
+      ]
+    },
+    {
+      "items": [
+        { "text": "item 3" }
+      ]
+    }
+  ]
+  const schema = [
+    { "path": "items", "props": [
+      { "path": "text" }
+    ] }
+  ]
+
+  fillData(data, schema, matrix)
+  t.deepEqual(matrix.toArray(), [
+    [ { val: 'item 1', rowSpan: 1, colSpan: 1 } ],
+    [ { val: 'item 2', rowSpan: 1, colSpan: 1 } ],
+    [ { val: 'item 3', rowSpan: 1, colSpan: 1 } ]
   ])
 })
