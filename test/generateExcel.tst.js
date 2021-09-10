@@ -1,7 +1,9 @@
+// 将文件后缀修改为 test.js 后再执行
+
 const test = require('ava')
 const generateExcel = require('../lib/generateExcel')
 
-test.skip('write simple object', t => {
+test('write simple object', t => {
   const schema = [
     { title: 'A', path: 'a' },
     { title: 'B', path: 'b' },
@@ -16,7 +18,7 @@ test.skip('write simple object', t => {
   t.pass()
 })
 
-test.skip('write object with merged cells', t => {
+test('write object with merged cells', t => {
   const schema = [
     { title: 'A', path: 'a' },
     { title: 'B', path: 'b', props: [
