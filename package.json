@@ -46,13 +46,7 @@
   },
   "dependencies": {
     "json5": "^2.2.0",
-    "lodash.difference": "^4.5.0",
-    "lodash.flatten": "^4.4.0",
-    "lodash.isfunction": "^3.0.9",
-    "lodash.isobject": "^3.0.2",
-    "lodash.isstring": "^4.0.1",
-    "lodash.merge": "^4.6.2",
-    "lodash.zip": "^4.2.0",
+    "lodash": "^4.17.21",
     "yargs": "^17.1.1"
   }
 }
