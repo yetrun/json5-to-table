@@ -3,7 +3,7 @@
 const fs = require('fs')
 const yargs = require('yargs')
 const JSON5 = require('json5')
-const difference = require('lodash.difference')
+const difference = require('lodash/difference')
 const { generateHTMLTable, generateExcel: originalGenerateExcel } = require('..')
 const generateExcel = function (data, schema) {
   return originalGenerateExcel(data, schema, { writeTo: '/dev/stdout' })
