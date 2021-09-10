@@ -19,5 +19,14 @@ module.exports = {
       amd: 'xlsx',
       root: 'XLSX'
     }
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/
+      }
+    ]
   }
 }
