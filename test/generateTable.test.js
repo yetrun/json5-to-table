@@ -74,10 +74,16 @@ test('schema is nested but data is a empty array', t => {
         row: 3,
         col: 2,
         rowSpan: 1,
-        colSpan: 2,
+        colSpan: 1,
         val: undefined
       },
-      undefined
+      {
+        row: 3,
+        col: 3,
+        rowSpan: 1,
+        colSpan: 1,
+        val: undefined
+      },
     ]
   ])
 })

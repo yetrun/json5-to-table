@@ -58,7 +58,7 @@ test('fill full value', t => {
   ])
 })
 
-test('fill full values of array', t => {
+test('cell value can be array', t => {
   const schema = { path: '' }
   const data = [1, 2, 3] 
   const matrix = new Matrix(3, 1)
@@ -300,8 +300,8 @@ test('fill empty array with multiple schemas', t => {
 
   fillData(data, schema, matrix)
   t.deepEqual(matrix.toArray(), [
-    [ { val: undefined, rowSpan: 2, colSpan: 2 },
-      undefined
+    [ { val: undefined, rowSpan: 2, colSpan: 1 },
+      { val: undefined, rowSpan: 2, colSpan: 1 },
     ],
     [ undefined,
       undefined
@@ -336,8 +336,8 @@ test('one property is an empty array', t => {
   fillData(data, schema, matrix)
   t.deepEqual(matrix.toArray(), [
     [ { val: 1, rowSpan: 2, colSpan: 1 },
-      { val: undefined, rowSpan: 2, colSpan: 2 },
-      undefined,
+      { val: undefined, rowSpan: 2, colSpan: 1 },
+      { val: undefined, rowSpan: 2, colSpan: 1 },
       { val: 2, rowSpan: 1, colSpan: 1 },
       { val: 3, rowSpan: 1, colSpan: 1 }
     ],
