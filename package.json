@@ -1,6 +1,6 @@
 {
   "name": "json5-to-table",
-  "version": "0.1.6-preview",
+  "version": "0.1.7",
   "description": "JSON 数据转化为表格的工具，支持深层嵌套数据，支持模式定义",
   "main": "dist/bundle.js",
   "bin": {
